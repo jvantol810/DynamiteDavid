@@ -8,6 +8,8 @@ public interface IBullet
     float speed { get; set; }
     //Duration: how long the bullet will last before clean-up
     float duration { get; set; }
+    //Scale: the scale of the bullet's Transform component (z = 0)
+    //Vector2 scale { get; set; }
     //Angle: the angle, in degrees, the bullet will be sent on fired.
     int angle { get; set; }
     //BulletSprite: The sprite that the bullet will look like
