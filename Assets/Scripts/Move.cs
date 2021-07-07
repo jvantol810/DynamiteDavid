@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Move : MonoBehaviour
@@ -14,7 +15,9 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb;
     //m_velocity is the "current velocity" param passed into Vector2.SmoothDamp. This is set at 0 because the player's velocity should start at 0--then, each time we set the velocity with SmoothDamp, it updates m_velocity.
     private Vector2 m_velocity = Vector2.zero;
-    
+
+    [Header("Dodge Settings")] 
+    public float dodgeSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,16 @@ public class Move : MonoBehaviour
     void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        
+        //Checks for roll Input
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector2 tempVect = direction;
+            tempVect = tempVect.normalized * (Time.fixedDeltaTime * dodgeSpeed);
+            rb.MovePosition((Vector2)transform.position + tempVect.normalized);
+            //I frames still needed to be added to dodge
+            //"Boom" mechanic needs to be added to dodge
+        }
     }
 
     private void FixedUpdate()
