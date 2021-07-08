@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7155068865979121202}
   - component: {fileID: 7155068864284724641}
   - component: {fileID: 8280792183691021617}
+  - component: {fileID: 949150731562707975}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7155068864284724641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   reticle: {fileID: 3822161545789454783, guid: 4fb8f2d562f09aa43917f531175e8eed, type: 3}
-  reticleDistance: {x: 1, y: 1}
+  reticleDistance: {x: 2, y: 2}
 --- !u!61 &8280792183691021617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -163,3 +164,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &949150731562707975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155068865979121206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d1af4eb1205284c8fc5638ce2c419f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 5
+  _maxHealth: 0
