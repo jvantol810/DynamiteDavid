@@ -25,7 +25,6 @@ public class BoomerangBullet : BulletBase
             {
                 transform.Translate(Vector3.up * -speed * Time.deltaTime, Space.Self);
             }
-            
         }
     }
 }
