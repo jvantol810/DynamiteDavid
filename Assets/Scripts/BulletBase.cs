@@ -41,7 +41,8 @@ public class BulletBase : MonoBehaviour, IBullet
     //FiredBy: A string that can be set so we know whether the player fired it, or the boss, or something else.
     [SerializeField]
     protected string firedBy;
-    //TimeLeft: Will be set equal to duration on start, and will begin to decrease when the bullet is fired.
+    //NoDuration: is set to true on start if the duration value is null
+    public bool hasDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,14 @@ public class BulletBase : MonoBehaviour, IBullet
         _bulletSprite = bsprite;
         _fireImmediately = fireNow;
     }
+    public void InitializeInterface(float spd, int ang, Sprite bsprite, bool fireNow)
+    {
+        _speed = spd;
+        _angle = ang;
+        _bulletSprite = bsprite;
+        _fireImmediately = fireNow;
+        _duration = 0;
+    }
     public void InitializeInterface(float spd, float dur, int ang)
     {
         _speed = spd;
@@ -82,19 +91,29 @@ public class BulletBase : MonoBehaviour, IBullet
 
     public virtual void CleanUp()
     {
-        Destroy(gameObject);
+
+       gameObject.SetActive(false);
+        
         //If we maintain bullets in a list, replace this with setting the bullet inactive, and anything else you need.
     }
-
+    //Sets the bullet to active and resets its timeLeft
+    public virtual void ActivateBullet()
+    {
+        gameObject.SetActive(true);
+        timeLeft = duration;
+    }
     public virtual void onUpdate()
     {
-        if (timeLeft > 0f)
+        if (_duration != 0)
         {
-            timeLeft -= Time.deltaTime;
-        }
-        else
-        {
-            CleanUp();
+            if (timeLeft > 0f)
+            {
+                timeLeft -= Time.deltaTime;
+            }
+            else
+            {
+                CleanUp();
+            }
         }
         if (fired)
         {
@@ -112,7 +131,11 @@ public class BulletBase : MonoBehaviour, IBullet
             directionArrow.SetActive(false);
         }
         //Initialize Internal State
-        timeLeft = duration;
+        if (duration != 0)
+        {
+            timeLeft = duration;
+        }
+        
         transform.Rotate(new Vector3(0f, 0f, angle));
         if (fireImmediately)
         {

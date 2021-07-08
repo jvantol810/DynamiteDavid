@@ -6,7 +6,7 @@ public interface IBullet
 {
     //Speed: how fast the bullet will travel
     float speed { get; set; }
-    //Duration: how long the bullet will last before clean-up
+    //Duration: how long the bullet will last before clean-up -- if set to 0, the bullet will last forever
     float duration { get; set; }
     //Scale: the scale of the bullet's Transform component (z = 0)
     //Vector2 scale { get; set; }
