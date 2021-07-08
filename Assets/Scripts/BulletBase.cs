@@ -57,11 +57,7 @@ public class BulletBase : MonoBehaviour, IBullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(fired)
-        {
-            //Detect if player, enemy, or something else
-            CleanUp();
-        }
+        onTriggerEnter2D(collision);
     }
 
     public void InitializeInterface(float spd, float dur, int ang, Sprite bsprite, bool fireNow)
@@ -125,6 +121,15 @@ public class BulletBase : MonoBehaviour, IBullet
         else
         {
             fired = false;
+        }
+    }
+
+    public virtual void onTriggerEnter2D(Collider2D collidedWith)
+    {
+        if (fired)
+        {
+            //Detect if player, enemy, or something else
+            CleanUp();
         }
     }
     
