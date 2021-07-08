@@ -4,28 +4,11 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour, IBullet
 {
-    /*
-    [Header("Bullet Properties")]
-    
-    //Speed: how fast the bullet will travel
-    //Duration: how long the bullet will last before clean-up
-    public speed = 1f, duration = 10f;
-    //Angle: the angle, in degrees, the bullet will be sent on fired.
-    public int angle = 0;
-    //FiredBy: A string that can be set so we know whether the player fired it, or the boss, or something else.
-    public string firedBy = "unknown";
-    //BulletSprite: The sprite that the bullet will look like
-    public Sprite bulletSprite;
-    //FireImmediately: if true, the bullet will be fired when created, if false then it will do nothing until fired manually.
-    //CanPierce: if true, clean-up will not occur on hit, if false clean-up will occur on the first hit.
-    public bool fireImmediately, canPierce;
-    [Header("Internal State")]
-    //Fired: set to false initially, and true when bullet is fired.
-    private bool fired;
-    //TimeLeft: Will be set equal to duration on start, and will begin to decrease when the bullet is fired.
-    private float timeLeft;
-    */
-
+    [Header("Debug Mode")]
+    public bool testingEnabled;
+    [Header("Children Variables")]
+    public GameObject directionArrow;
+    public GameObject spriteObject;
     //Speed: how fast the bullet will travel
     [Header("IBullet Properties")]
     [SerializeField]
@@ -49,65 +32,27 @@ public class BulletBase : MonoBehaviour, IBullet
     public bool fireImmediately { get { return _fireImmediately; } set { _fireImmediately = fireImmediately; } }
 
     [Header("Internal State")]
+    //Fired: set to false initially, and true when bullet is fired.
     [SerializeField]
-    private bool fired;
+    protected bool fired;
+    //TimeLeft: Will be set equal to duration on start, and will begin to decrease when the bullet is fired.
     [SerializeField]
-    private float timeLeft;
+    protected float timeLeft;
     //FiredBy: A string that can be set so we know whether the player fired it, or the boss, or something else.
     [SerializeField]
-    private string firedBy;
-    //Fired: set to false initially, and true when bullet is fired.
-    //private bool _fired { get; set; }
-    //public bool fired { get { return _fired; } }
+    protected string firedBy;
     //TimeLeft: Will be set equal to duration on start, and will begin to decrease when the bullet is fired.
-    //private float _timeLeft { get; set; }
-    //public float timeLeft { get { return _timeLeft;  } }
-
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        //test interface
-        //InitializeInterface(1f, 35f, 0);
-        /*speed = 5;
-        Debug.Log(_speed);
-        Debug.Log(speed);
-        _speed = 27;
-        Debug.Log(_speed);
-        Debug.Log(speed);
-        */
-        //Initialize Internal State
-        timeLeft = duration;
-        transform.Rotate(new Vector3(0f, 0f, angle));
-        if (fireImmediately)
-        {
-            Fire();
-        }
-        else
-        {
-            fired = false;
-        }
-        
-        
+        onStart();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timeLeft > 0f)
-        {
-            timeLeft -= Time.deltaTime;
-        }
-        else
-        {
-            CleanUp();
-        }
-        if (fired)
-        {
-            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
-        }
+        onUpdate();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -134,16 +79,53 @@ public class BulletBase : MonoBehaviour, IBullet
         _angle = ang;
     }
 
-    public void Fire()
+    public virtual void Fire()
     {
         fired = true;
     }
 
-    public void CleanUp()
+    public virtual void CleanUp()
     {
         Destroy(gameObject);
         //If we maintain bullets in a list, replace this with setting the bullet inactive, and anything else you need.
     }
 
+    public virtual void onUpdate()
+    {
+        if (timeLeft > 0f)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+        else
+        {
+            CleanUp();
+        }
+        if (fired)
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
+        }
+    }
+
+    public virtual void onStart()
+    {
+        //Load Sprite
+        spriteObject.GetComponent<SpriteRenderer>().sprite = bulletSprite;
+        //Check for debug mode
+        if (!testingEnabled) //Disable debug sprites if not testing.
+        {
+            directionArrow.SetActive(false);
+        }
+        //Initialize Internal State
+        timeLeft = duration;
+        transform.Rotate(new Vector3(0f, 0f, angle));
+        if (fireImmediately)
+        {
+            Fire();
+        }
+        else
+        {
+            fired = false;
+        }
+    }
     
 }
