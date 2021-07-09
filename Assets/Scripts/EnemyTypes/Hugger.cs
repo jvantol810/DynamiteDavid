@@ -7,7 +7,7 @@ public class Hugger : MonoBehaviour, IEntityStats
 {
     private GameObject player;
     private Rigidbody2D rb;
-    public float speed = 15;
+    public float speed = 2;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
     [SerializeField]
