@@ -8,6 +8,7 @@ public class Hugger : MonoBehaviour, IEntityStats
     private GameObject player;
     private Rigidbody2D rb;
     public float speed = 2;
+    public float damage = 1;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
     [SerializeField]
@@ -41,14 +42,24 @@ public class Hugger : MonoBehaviour, IEntityStats
         transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.fixedDeltaTime);
     }
 
-    public void OnCollisionEnter(Collision collison)
+    public void OnCollisionEnter2D(Collision2D collison)
     {
-        
+        if (collison.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
+        }
+        Debug.Log("collided");
     }
     
-    public void OnCollisionStay(Collision collison)
+    public void OnCollisionStay2D(Collision2D collison)
     {
-        
+        if (collison.gameObject.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
+            Debug.Log("collided");
+        }
+        player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
+        Debug.Log("collided");
     }
 
     void Start()
@@ -61,6 +72,7 @@ public class Hugger : MonoBehaviour, IEntityStats
     void FixedUpdate()
     {
         ChasePlayer();
+        
         
     }
 }
