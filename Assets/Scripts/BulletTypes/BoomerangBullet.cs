@@ -27,4 +27,13 @@ public class BoomerangBullet : BulletBase
             }
         }
     }
+
+    public override void onTriggerEnter2D(Collider2D collidedWith)
+    {
+        if (fired && collidedWith.gameObject.tag != "Player")
+        {
+            //Detect if player, enemy, or something else
+            CleanUp();
+        }
+    }
 }

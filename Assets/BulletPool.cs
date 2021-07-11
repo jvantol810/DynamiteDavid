@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletPool : MonoBehaviour
 {
     public int poolSize;
-    
+
     [SerializeField]
     private GameObject bulletPrefab;
     
@@ -40,7 +40,7 @@ public class BulletPool : MonoBehaviour
     }
 
     //Set the next bullet in the list to be active, teleport it to the firePoint (if any was passed in), and increment the bulletIndex
-    void FireBulletFromPool(Vector2 firePoint = new Vector2())
+    public void FireBulletFromPool(Vector2 firePoint = new Vector2())
     {
         GameObject firedBullet = pool[bulletIndex];
         if (firedBullet.activeSelf == false)
@@ -48,6 +48,7 @@ public class BulletPool : MonoBehaviour
             firedBullet.GetComponent<BulletBase>().ActivateBullet();
         }
         firedBullet.transform.position = firePoint;
+        firedBullet.transform.eulerAngles = new Vector3(0f, 0f, angle);
         if (bulletIndex+1 >= pool.Count)
         {
             bulletIndex = 0;

@@ -20,7 +20,7 @@ public class Aim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         Vector2 reticleDir = mousePos.normalized;
         Vector2 reticlePos = m_rigidbody.position + reticleDir * reticleDistance;
         reticle.transform.position = reticlePos;
