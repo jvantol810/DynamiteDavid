@@ -13,6 +13,8 @@ public class Move : MonoBehaviour
     private Vector2 direction { get; set; }
     //Reference to gameObj's rigidbody to set its velocity for movement
     private Rigidbody2D rb;
+    //Collider for roll IFrames
+    private BoxCollider2D col;
     //m_velocity is the "current velocity" param passed into Vector2.SmoothDamp. This is set at 0 because the player's velocity should start at 0--then, each time we set the velocity with SmoothDamp, it updates m_velocity.
     private Vector2 m_velocity = Vector2.zero;
 
@@ -22,6 +24,7 @@ public class Move : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -32,10 +35,13 @@ public class Move : MonoBehaviour
         //Checks for roll Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //Turn collider off for roll
+            col.enabled = false;
             Vector2 tempVect = direction;
             tempVect = tempVect.normalized * (Time.fixedDeltaTime * dodgeSpeed);
-            rb.MovePosition((Vector2)transform.position + tempVect.normalized);
-            //I frames still needed to be added to dodge
+            rb.MovePosition((Vector2)transform.position + tempVect.normalized * 2.25f);
+            //Turn collider back on
+            col.enabled = true;
             //"Boom" mechanic needs to be added to dodge
         }
     }

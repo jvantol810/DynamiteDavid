@@ -58,7 +58,6 @@ public class Hugger : MonoBehaviour, IEntityStats
             player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
             Debug.Log("collided");
         }
-        player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
         Debug.Log("collided");
     }
 
