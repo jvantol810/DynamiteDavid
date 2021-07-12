@@ -14,7 +14,6 @@ public class Aim : MonoBehaviour
     void Start()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        reticle = Instantiate<GameObject>(reticle);
     }
 
     // Update is called once per frame

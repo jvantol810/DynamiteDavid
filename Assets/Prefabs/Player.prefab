@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 7155068864284724641}
   - component: {fileID: 8280792183691021617}
   - component: {fileID: 949150731562707975}
+  - component: {fileID: 944769635833905496}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,3 +179,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 5
   _maxHealth: 0
+--- !u!114 &944769635833905496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155068865979121206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a45dc9327ab5c49ac0107fbb0125f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 10
+  reloadTime: 2
+  gapTime: 2
+  powerUpTime: 2
+  Bullet: {fileID: 6808941460507001580, guid: 3d6e2c35124af074aa588cd1de6c74a8, type: 3}
+  currentAmmo: 0
+  shootingEnabled: 0
+  reloading: 0
+  shot: 0
+  hasPowerUp: 0
+  bulletPoolObject: {fileID: 0}
+  bulletPool: {fileID: 0}
+  reticle: {fileID: 0}
+  hasReticle: 0
+  toReticleAngle: 0
+  flatAngle: 0

@@ -152,12 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a45dc9327ab5c49ac0107fbb0125f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 10
-  reloadTime: 0
+  maxAmmo: 4
+  reloadTime: 2
   gapTime: 0.4
   powerUpTime: 0
   Bullet: {fileID: 0}
-  currentAmmo: 0
+  currentAmmo: 4
   shootingEnabled: 0
   reloading: 0
   shot: 0

@@ -56,6 +56,10 @@ public class BulletBase : MonoBehaviour, IBullet
         onUpdate();
     }
 
+    public void setAngle(int angle)
+    {
+        _angle = angle;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         onTriggerEnter2D(collision);
@@ -135,7 +139,7 @@ public class BulletBase : MonoBehaviour, IBullet
         {
             timeLeft = duration;
         }
-        
+
         transform.Rotate(new Vector3(0f, 0f, angle));
         if (fireImmediately)
         {
