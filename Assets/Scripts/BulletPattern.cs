@@ -9,6 +9,9 @@ public class BulletPattern : MonoBehaviour
 
     private float startAngle = 90f, endAngle = 270f;
     private float angle = 0f;
+
+    public float timer = 2f;
+    private float timeRemaining;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class BulletPattern : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InvokeRepeating("FirePattern", 0f, 2f);
+        
     }
 
     void FirePattern()

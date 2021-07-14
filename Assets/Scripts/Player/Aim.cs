@@ -7,8 +7,10 @@ public class Aim : MonoBehaviour
     private Rigidbody2D m_rigidbody;
     public Camera cam;
     public GameObject reticle;
+    public Vector2 reticlePos;
     [Header("Distance From Player")]
     public Vector2 reticleDistance;
+    public float aimAngle;
     Vector2 mousePos;
     // Start is called before the first frame update
     void Start()
@@ -21,14 +23,17 @@ public class Aim : MonoBehaviour
     {
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         Vector2 reticleDir = mousePos.normalized;
-        Vector2 reticlePos = m_rigidbody.position + reticleDir * reticleDistance;
+        reticlePos = m_rigidbody.position + reticleDir * reticleDistance;
         reticle.transform.position = reticlePos;
+
+        Vector2 lookDirection = reticlePos;
+        float aimAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        m_rigidbody.rotation = aimAngle;
     }
 
-    private void FixedUpdate()
+    public float getAimAngle()
     {
-        Vector2 lookDirection = mousePos - m_rigidbody.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
-        m_rigidbody.rotation = angle;
+        return aimAngle;
     }
+
 }

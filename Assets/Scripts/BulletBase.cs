@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour, IBullet
 {
+    public List<string> tagsAffected = new List<string>();
     [Header("Debug Mode")]
     public bool testingEnabled;
     [Header("Children Variables")]
@@ -155,8 +156,12 @@ public class BulletBase : MonoBehaviour, IBullet
     {
         if (fired)
         {
-            //Detect if player, enemy, or something else
-            CleanUp();
+            if (tagsAffected.Contains(collidedWith.tag))
+            {
+                //Detect if player, enemy, or something else
+                CleanUp();
+            }
+            
         }
     }
     
