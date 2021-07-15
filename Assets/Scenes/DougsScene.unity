@@ -648,12 +648,12 @@ PrefabInstance:
       objectReference: {fileID: 1192345589}
     - target: {fileID: 7155068865979121203, guid: 2b7ebeccd9feef84bbb80b13d8bfbddb, type: 3}
       propertyPath: dodgeSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7155068865979121203, guid: 2b7ebeccd9feef84bbb80b13d8bfbddb, type: 3}
       propertyPath: explosionPrefab
       value: 
-      objectReference: {fileID: 5270352122144266061, guid: ebb577a23e5ed5f4f917992210827d24, type: 3}
+      objectReference: {fileID: 3684621568823528642, guid: e7659d9f1fa88194e833213326958c05, type: 3}
     - target: {fileID: 7155068865979121204, guid: 2b7ebeccd9feef84bbb80b13d8bfbddb, type: 3}
       propertyPath: m_RootOrder
       value: 1

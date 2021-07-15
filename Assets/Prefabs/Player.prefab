@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8280792183691021617}
   - component: {fileID: 949150731562707975}
   - component: {fileID: 944769635833905496}
+  - component: {fileID: 6684948584035479143}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -102,7 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 25
   movementSmoothing: 0.05
-  dodgeSpeed: 0
+  dodgeSpeed: 25
+  explosionPrefab: {fileID: 3684621568823528642, guid: e7659d9f1fa88194e833213326958c05, type: 3}
+  dodging: 0
 --- !u!50 &7155068865979121202
 Rigidbody2D:
   serializedVersion: 4
@@ -138,7 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   reticle: {fileID: 3822161545789454783, guid: 4fb8f2d562f09aa43917f531175e8eed, type: 3}
+  reticlePos: {x: 0, y: 0}
   reticleDistance: {x: 2, y: 2}
+  aimAngle: 0
 --- !u!61 &8280792183691021617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,3 +212,17 @@ MonoBehaviour:
   hasReticle: 0
   toReticleAngle: 0
   flatAngle: 0
+--- !u!114 &6684948584035479143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155068865979121206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940d4c106c957404d92398ba4d281080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 8280792183691021617}
+  waitTime: 0.5
