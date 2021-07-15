@@ -191,8 +191,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6808941460507001580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.2518, y: -0.2518, z: 0}
+  m_LocalScale: {x: 0.4965, y: 0.4965, z: 0.4965}
   m_Children:
   - {fileID: 6808941459687027514}
   - {fileID: 5322572406831153462}
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb791abf8526a914393eb880cacb1253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagsAffected: []
   testingEnabled: 0
   directionArrow: {fileID: 6808941459687027515}
   spriteObject: {fileID: 2525035677860243106}
@@ -273,6 +274,7 @@ MonoBehaviour:
   fired: 0
   timeLeft: 0
   firedBy: 
+  hasDuration: 0
 --- !u!58 &6808941460507001568
 CircleCollider2D:
   m_ObjectHideFlags: 0

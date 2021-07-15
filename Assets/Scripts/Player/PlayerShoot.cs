@@ -28,7 +28,7 @@ public class PlayerShoot : ShootBase
         flatAngle = (int)transform.eulerAngles.z - 90;
         //toReticleAngle = (int)Vector3.SignedAngle(transform.position, reticle.transform.position, Vector3.up);
         Vector3 target = transform.position - reticle.transform.position;
-        toReticleAngle = flatAngle - 90 - ((int)Vector3.SignedAngle(target, transform.up, Vector3.up) * -1);
+        toReticleAngle = flatAngle + 90 - ((int)Vector3.SignedAngle(target, transform.up, Vector3.up) * -1);
         SetShootingEnabled(Input.GetMouseButton(0));
         if(hasReticle)
         {

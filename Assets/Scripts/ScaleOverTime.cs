@@ -8,10 +8,6 @@ public class ScaleOverTime : MonoBehaviour
     public Vector2 scaleVector = new Vector2(1, 1);
     public Vector2 finalSize;
     protected bool scaling = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     protected virtual void Update()
