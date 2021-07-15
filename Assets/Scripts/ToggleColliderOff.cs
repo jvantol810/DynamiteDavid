@@ -16,11 +16,8 @@ public class ToggleColliderOff : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Update()
+    public void Toggle()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ToggleCollider());
-        }
+        StartCoroutine(ToggleCollider());
     }
 }
