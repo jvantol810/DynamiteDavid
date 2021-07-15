@@ -20,6 +20,8 @@ public class Move : MonoBehaviour
 
     [Header("Dodge Settings")] 
     public float dodgeSpeed;
+    //Explosion prefab
+    public GameObject explosionPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +37,13 @@ public class Move : MonoBehaviour
         //Checks for roll Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //Spawns explosions
+            Instantiate(explosionPrefab, rb.position, Quaternion.identity);
             //Turn collider off for roll
-            col.enabled = false;
             Vector2 tempVect = direction;
             tempVect = tempVect.normalized * (Time.fixedDeltaTime * dodgeSpeed);
             rb.MovePosition((Vector2)transform.position + tempVect.normalized * 2.25f);
             //Turn collider back on
-            col.enabled = true;
-            //"Boom" mechanic needs to be added to dodge
         }
     }
 
