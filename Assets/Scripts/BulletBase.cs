@@ -23,6 +23,9 @@ public class BulletBase : MonoBehaviour, IBullet
     [SerializeField]
     private int _angle;
     public int angle { get { return _angle; } set { _angle = angle; } }
+    [SerializeField]
+    private int _direction;
+    public int direction { get { return _direction; } set { _direction = direction; } }
     //BulletSprite: The sprite that the bullet will look like
     [SerializeField]
     private Sprite _bulletSprite;
@@ -60,6 +63,7 @@ public class BulletBase : MonoBehaviour, IBullet
     public void setAngle(int angle)
     {
         _angle = angle;
+        transform.Rotate(new Vector3(0f, 0f, angle));
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

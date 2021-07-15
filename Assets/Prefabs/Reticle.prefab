@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1155357686131908546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3465816213446587950}
+  - component: {fileID: 6090651380627216336}
+  m_Layer: 0
+  m_Name: PlayerBulletPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3465816213446587950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155357686131908546}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.000000021178455, y: 0, z: 0}
+  m_LocalScale: {x: 1.421262, y: 1.421262, z: 1.421262}
+  m_Children: []
+  m_Father: {fileID: 3822161545789454781}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6090651380627216336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155357686131908546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376846eda6c6aa94192ec5bb4c74df05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 10
+  bulletPrefab: {fileID: 6808941460507001580, guid: 3d6e2c35124af074aa588cd1de6c74a8, type: 3}
+  duration: 0
+  speed: 5
+  angle: 0
+  sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
+  fireNow: 1
 --- !u!1 &3822161545789454783
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3822161545789454781}
   - component: {fileID: 3822161545789454780}
+  - component: {fileID: 5843212600172109861}
   m_Layer: 0
   m_Name: Reticle
   m_TagString: Reticle
@@ -26,8 +77,9 @@ Transform:
   m_GameObject: {fileID: 3822161545789454783}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.18518448, y: -0.9889952, z: 0}
-  m_LocalScale: {x: 0.7036, y: 0.7036, z: 0.7036}
-  m_Children: []
+  m_LocalScale: {x: 0.40428853, y: 0.40428853, z: 0.40428853}
+  m_Children:
+  - {fileID: 3465816213446587950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,3 +134,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5843212600172109861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3822161545789454783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19a45dc9327ab5c49ac0107fbb0125f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 5
+  reloadTime: 2
+  gapTime: 0.5
+  powerUpTime: 0
+  Bullet: {fileID: 3822161545789454783}
+  currentAmmo: 0
+  shootingEnabled: 0
+  reloading: 0
+  shot: 0
+  hasPowerUp: 0
+  bulletPoolObject: {fileID: 1155357686131908546}
+  bulletPool: {fileID: 6090651380627216336}
+  reticle: {fileID: 3822161545789454783}
+  hasReticle: 0
+  toReticleAngle: 0
+  flatAngle: 0

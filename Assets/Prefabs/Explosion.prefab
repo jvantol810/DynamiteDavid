@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToScale: {fileID: 3684621568823528642}
-  scaleVector: {x: 3, y: 3}
-  finalSize: {x: 5, y: 5}
+  scaleVector: {x: 2, y: 2}
+  finalSize: {x: 3, y: 3}
   entityTagsAffected:
   - Player
   - Enemy
