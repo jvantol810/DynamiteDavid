@@ -39,19 +39,29 @@ public class Move : MonoBehaviour
         {
             //Spawns explosions
             Instantiate(explosionPrefab, rb.position, Quaternion.identity);
+            MoveRigidbody(direction, dodgeSpeed*100, movementSmoothing);
             //Turn collider off for roll
-            Vector2 tempVect = direction;
-            tempVect = tempVect.normalized * (Time.fixedDeltaTime * dodgeSpeed);
-            rb.MovePosition((Vector2)transform.position + tempVect.normalized * 2.25f);
+            //Vector2 tempVect = direction;
+            //tempVect = tempVect.normalized * (Time.deltaTime * dodgeSpeed);
+            //rb.MovePosition((Vector2)transform.position + tempVect.normalized);
             //Turn collider back on
         }
     }
 
     private void FixedUpdate()
     {
+        ////Target velocity is calculated by taking the speed, time (to adjust for differing framerates), and direction into account
+        //Vector2 targetVelocity = new Vector2(speed * 10 * direction.x * Time.fixedDeltaTime, speed * 10 * direction.y * Time.fixedDeltaTime);
+        ////Set the velocity using the SmoothDamp function to ensure a smooth movement experience
+        //rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref m_velocity, movementSmoothing);
+        MoveRigidbody(direction, speed, movementSmoothing);
+    }
+
+    private void MoveRigidbody(Vector2 direction, float speed, float movementSmoothing)
+    {
         //Target velocity is calculated by taking the speed, time (to adjust for differing framerates), and direction into account
-        Vector2 targetVelocity = new Vector2(speed * 10 * direction.x * Time.fixedDeltaTime, speed * 10 * direction.y * Time.fixedDeltaTime);
+        Vector2 target = new Vector2(speed * 10 * direction.x * Time.fixedDeltaTime, speed * 10 * direction.y * Time.fixedDeltaTime);
         //Set the velocity using the SmoothDamp function to ensure a smooth movement experience
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref m_velocity, movementSmoothing);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, target, ref m_velocity, movementSmoothing);
     }
 }
