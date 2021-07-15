@@ -101,6 +101,7 @@ MonoBehaviour:
   finalSize: {x: 5, y: 5}
   entityTagsAffected:
   - Player
+  - Enemy
 --- !u!58 &3684621568823528646
 CircleCollider2D:
   m_ObjectHideFlags: 0
