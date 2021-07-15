@@ -22,6 +22,7 @@ public class Move : MonoBehaviour
     public float dodgeSpeed;
     //Explosion prefab
     public GameObject explosionPrefab;
+    public bool dodging = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +38,7 @@ public class Move : MonoBehaviour
         //Checks for roll Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Spawns explosions
-            Instantiate(explosionPrefab, rb.position, Quaternion.identity);
-            MoveRigidbody(direction, dodgeSpeed*100, movementSmoothing);
+            dodging = true;
             //Turn collider off for roll
             //Vector2 tempVect = direction;
             //tempVect = tempVect.normalized * (Time.deltaTime * dodgeSpeed);
@@ -55,6 +54,10 @@ public class Move : MonoBehaviour
         ////Set the velocity using the SmoothDamp function to ensure a smooth movement experience
         //rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref m_velocity, movementSmoothing);
         MoveRigidbody(direction, speed, movementSmoothing);
+        if (dodging)
+        {
+            Dodge();
+        }
     }
 
     private void MoveRigidbody(Vector2 direction, float speed, float movementSmoothing)
@@ -63,5 +66,13 @@ public class Move : MonoBehaviour
         Vector2 target = new Vector2(speed * 10 * direction.x * Time.fixedDeltaTime, speed * 10 * direction.y * Time.fixedDeltaTime);
         //Set the velocity using the SmoothDamp function to ensure a smooth movement experience
         rb.velocity = Vector2.SmoothDamp(rb.velocity, target, ref m_velocity, movementSmoothing);
+    }
+
+    private void Dodge()
+    {
+        //Spawns explosions
+        Instantiate(explosionPrefab, rb.position, Quaternion.identity);
+        MoveRigidbody(direction, dodgeSpeed * 20, movementSmoothing);
+        dodging = false;
     }
 }
