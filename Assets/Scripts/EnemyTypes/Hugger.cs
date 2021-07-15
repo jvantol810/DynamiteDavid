@@ -48,7 +48,6 @@ public class Hugger : MonoBehaviour, IEntityStats
         {
             player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
         }
-        Debug.Log("collided");
     }
     
     public void OnCollisionStay2D(Collision2D collison)
@@ -56,12 +55,10 @@ public class Hugger : MonoBehaviour, IEntityStats
         if (collison.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerStats>().takeDamage(damage * Time.fixedDeltaTime);
-            Debug.Log("collided");
         }
-        Debug.Log("collided");
     }
 
-    void Start()
+    void Awake()
     {
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();

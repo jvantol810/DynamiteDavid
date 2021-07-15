@@ -5,13 +5,13 @@ using UnityEngine;
 public class ToggleColliderOff : MonoBehaviour
 {
     public Collider2D col;
-    public float waitTime;
+    public float duration;
 
     // Update is called once per frame
-    IEnumerator ToggleCollider()
+    private IEnumerator ToggleCollider()
     {
         col.enabled = false;
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(duration);
         col.enabled = true;
     }
     
