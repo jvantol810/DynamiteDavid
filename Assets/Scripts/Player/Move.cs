@@ -34,7 +34,6 @@ public class Move : MonoBehaviour
     void Update()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        
         //Checks for roll Input
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -53,7 +52,7 @@ public class Move : MonoBehaviour
         //Vector2 targetVelocity = new Vector2(speed * 10 * direction.x * Time.fixedDeltaTime, speed * 10 * direction.y * Time.fixedDeltaTime);
         ////Set the velocity using the SmoothDamp function to ensure a smooth movement experience
         //rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref m_velocity, movementSmoothing);
-        MoveRigidbody(direction, speed, movementSmoothing);
+        MoveRigidbody(direction.normalized, speed, movementSmoothing);
         if (dodging)
         {
             Dodge();
@@ -72,7 +71,7 @@ public class Move : MonoBehaviour
     {
         //Spawns explosions
         Instantiate(explosionPrefab, rb.position, Quaternion.identity);
-        MoveRigidbody(direction, dodgeSpeed * 20, movementSmoothing);
+        MoveRigidbody(direction.normalized, dodgeSpeed * 20, movementSmoothing);
         dodging = false;
     }
 }
