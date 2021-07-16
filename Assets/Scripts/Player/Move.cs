@@ -69,6 +69,8 @@ public class Move : MonoBehaviour
 
     private void Dodge()
     {
+        //Toggles Collider
+        GetComponent<ToggleColliderOff>().Toggle();
         //Spawns explosions
         Instantiate(explosionPrefab, rb.position, Quaternion.identity);
         MoveRigidbody(direction.normalized, dodgeSpeed * 20, movementSmoothing);
