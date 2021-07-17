@@ -1,5 +1,48 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5727764696445906240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8510195075791653128}
+  - component: {fileID: 4202018077767843658}
+  m_Layer: 0
+  m_Name: PlayerCooldowns
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8510195075791653128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727764696445906240}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7155068865979121204}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4202018077767843658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727764696445906240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e05d0a44b6f479345af679bc192a47e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7155068865979121206
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +78,7 @@ Transform:
   m_LocalScale: {x: 0.6179154, y: 0.5976701, z: 1.2412236}
   m_Children:
   - {fileID: 3822161544402173249}
+  - {fileID: 8510195075791653128}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53d80ff6abc94f43a797a77de273a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldowns: {fileID: 4202018077767843658}
+  dodgeCooldown: 0.7
   speed: 25
   movementSmoothing: 0.05
   dodgeSpeed: 10
