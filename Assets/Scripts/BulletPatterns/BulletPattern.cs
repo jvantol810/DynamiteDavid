@@ -8,13 +8,13 @@ public class BulletPattern : MonoBehaviour
     public BulletPool pool;
 
     public int startAngle = 0, endAngle = 360;
-    public void setAngles(int start, int end)
-    {
-        this.startAngle = start;
-        this.endAngle = end;
-    }
-    public int angleStepMultiplierMin = 1, angleStepMultiplierMax = 1, numberOfLoops = 1;
+
+    public int angleStepMultiplierMin = 1;
+    public int angleStepMultiplierMax = 1;
+    public int numberOfLoops = 1;
+    public float loopDelay;
     public float shotDelay;
+    
 
     public BulletPattern(int startAngle, int endAngle, float shotDelay = 0, int numberOfLoops = 1, int angleStepMultiplierMin = 1, int angleStepMultiplierMax = 1)
     {
@@ -23,6 +23,7 @@ public class BulletPattern : MonoBehaviour
         this.numberOfLoops = numberOfLoops;
         this.angleStepMultiplierMin = angleStepMultiplierMin;
         this.angleStepMultiplierMax = angleStepMultiplierMax;
+        this.shotDelay = shotDelay;
     }
 
     public virtual IEnumerator Fire()

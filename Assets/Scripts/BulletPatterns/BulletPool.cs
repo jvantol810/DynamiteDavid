@@ -48,7 +48,7 @@ public class BulletPool : MonoBehaviour
     }
 
     //Set the next bullet in the list to be active, teleport it to the firePoint (if any was passed in), and increment the bulletIndex
-    public GameObject FireBulletFromPool(Vector2 firePoint = new Vector2())
+    public GameObject FireBulletFromPool(Vector2 firePoint = new Vector2(), int angle = 0)
     {
         GameObject firedBullet = pool[bulletIndex];
         if (firedBullet.activeSelf == false)
@@ -56,6 +56,8 @@ public class BulletPool : MonoBehaviour
             firedBullet.GetComponent<BulletBase>().ActivateBullet();
         }
         firedBullet.transform.position = firePoint;
+
+        if (angle == 0) { angle = this.angle; }
         firedBullet.transform.eulerAngles = new Vector3(0f, 0f, angle); 
         
         if (bulletIndex + 1 >= pool.Count)

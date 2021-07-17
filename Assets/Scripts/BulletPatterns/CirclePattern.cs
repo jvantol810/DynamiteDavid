@@ -6,6 +6,7 @@ public class CirclePattern : BulletPattern
 {
     public int numberOfRings = 1;
     public float ringDelay = 0.2f;
+    public int ringSize;
     public void Reset()
     {
         startAngle = 0;
@@ -13,6 +14,7 @@ public class CirclePattern : BulletPattern
         angleStepMultiplierMin = 1;
         angleStepMultiplierMax = 1;
         numberOfLoops = 1;
+        loopDelay = 0;
         shotDelay = 0f;
         numberOfRings = 2;
         ringDelay = 0.2f;
@@ -20,13 +22,13 @@ public class CirclePattern : BulletPattern
 
     public void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("f"))
         {
             StartCoroutine(Fire());
-            Debug.Log("Fire!");
         }
+
     }
-    public CirclePattern(float shotDelay, int numberOfRings, float ringDelay, int startAngle = 0, int endAngle = 360) : base(startAngle, endAngle, shotDelay)
+    public CirclePattern(int bulletsPerRing, int numberOfRings, float ringDelay, int startAngle = 0, int endAngle = 360) : base(startAngle, endAngle, bulletsPerRing)
     {
         this.startAngle = startAngle;
         this.endAngle = endAngle;
@@ -38,29 +40,30 @@ public class CirclePattern : BulletPattern
     {
         int rings = numberOfRings;
         int loops = numberOfLoops;
-        int ringSize = (pool.poolSize / rings) / 2;
+        int ringSize = this.ringSize;
         int angleStep = endAngle / ringSize;
         int angle = startAngle;
-        float originalPoolSpeed = pool.speed;
-        
         while(loops > 0)
         {
-            Debug.Log("LOOPING!");
+            angle = startAngle;
+            rings = numberOfRings;
             while (rings > 0)
             {
-                for (int i = 0; i < ringSize + 1; i++)
+                for (int i = 0; i < ringSize; i++)
                 {
-                    BulletBase firedBullet = pool.FireBulletFromPool(transform.position).GetComponent<BulletBase>();
-                    
-                    yield return new WaitForSeconds(shotDelay);
-                    angle += angleStep;
+                    pool.FireBulletFromPool(transform.position, angle);
+                    if(shotDelay > 0) { yield return new WaitForSeconds(shotDelay); }
+                    angle += angleStep * Random.Range(angleStepMultiplierMin, angleStepMultiplierMax); 
                 }
-                //pool.SetBulletSpeed(originalPoolSpeed);
                 yield return new WaitForSeconds(ringDelay);
                 rings--;
             }
+            yield return new WaitForSeconds(loopDelay);
             loops--;
         }
         yield return null;
     }
+
 }
+   
+
