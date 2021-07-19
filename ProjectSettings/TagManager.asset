@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Reticle
+  - Enemy
+  - PlayerHUI
   layers:
   - Default
   - TransparentFX
@@ -42,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UISort
+    uniqueID: 473607339
+    locked: 0
+  - name: UIEffectSort
+    uniqueID: 675829731
     locked: 0
