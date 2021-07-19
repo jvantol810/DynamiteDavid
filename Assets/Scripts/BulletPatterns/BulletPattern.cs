@@ -6,7 +6,7 @@ public class BulletPattern : MonoBehaviour
 {
     [SerializeField]
     public BulletPool pool;
-
+    public Transform firePoint;
     public int startAngle = 0, endAngle = 360;
 
     public int angleStepMultiplierMin = 1;
@@ -35,7 +35,7 @@ public class BulletPattern : MonoBehaviour
             for (int i = 0; i < pool.poolSize + 1; i++)
             {
                 pool.angle = angle;
-                pool.FireBulletFromPool(transform.position);
+                pool.FireBulletFromPool(firePoint.position);
                 yield return new WaitForSeconds(shotDelay);
                 angle += angleStep * Random.Range(angleStepMultiplierMin, angleStepMultiplierMax);
             }

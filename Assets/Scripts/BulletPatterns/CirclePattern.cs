@@ -51,7 +51,7 @@ public class CirclePattern : BulletPattern
             {
                 for (int i = 0; i < ringSize; i++)
                 {
-                    pool.FireBulletFromPool(transform.position, angle);
+                    pool.FireBulletFromPool(firePoint.position, angle);
                     if(shotDelay > 0) { yield return new WaitForSeconds(shotDelay); }
                     angle += angleStep * Random.Range(angleStepMultiplierMin, angleStepMultiplierMax); 
                 }

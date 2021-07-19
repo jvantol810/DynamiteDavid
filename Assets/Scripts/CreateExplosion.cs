@@ -2,29 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateExplosion : ScaleOverTime
+public class CreateExplosion : MonoBehaviour
 {
-    protected Sprite ExplosionSprite;
+    public GameObject explosionObject;
+    public Vector2 scaleVector = new Vector2(1, 1);
+    public Vector2 finalSize;
     public List<string> entityTagsAffected;
-
-    private void Awake()
-    {
-        ExplosionSprite = GetComponent<SpriteRenderer>().sprite;
-    }
+    public bool exploding = true;
+    public float damage;
 
     private void Update()
     {
-        base.Update();
-        if (!this.scaling)
+        if (exploding)
         {
-            Destroy(gameObject);
+            Explode();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(entityTagsAffected.Contains(collision.gameObject.tag)){
-            collision.gameObject.GetComponent<IEntityStats>().takeDamage(2);
+            collision.gameObject.GetComponent<IEntityStats>().takeDamage(damage);
         }
+    }
+
+    public void Explode()
+    {
+        if (explosionObject.transform.localScale.x < finalSize.x)
+        {
+            explosionObject.transform.localScale += new Vector3(scaleVector.x * Time.deltaTime, 0, 0);
+        }
+        if (explosionObject.transform.localScale.y < finalSize.y)
+        {
+            explosionObject.transform.localScale += new Vector3(0, scaleVector.y * Time.deltaTime, 0);
+        }
+        if (explosionObject.transform.localScale.x >= finalSize.x && explosionObject.transform.localScale.y >= finalSize.y)
+        {
+            EndExplosion();
+        }
+    }
+    public virtual void EndExplosion()
+    {
+        exploding = false;
+        gameObject.SetActive(false);
     }
 }

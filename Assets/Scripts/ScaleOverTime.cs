@@ -7,7 +7,7 @@ public class ScaleOverTime : MonoBehaviour
     public GameObject objectToScale;
     public Vector2 scaleVector = new Vector2(1, 1);
     public Vector2 finalSize;
-    protected bool scaling = true;
+    public bool scaling = true;
 
     // Update is called once per frame
     protected virtual void Update()
