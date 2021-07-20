@@ -8,9 +8,9 @@ public class MineController : MonoBehaviour
     public Sprite activeSprite;
     public GameObject explosionPrefab;
     public List<string> entityTagsAffected;
-    private float explosionTimer;
-    private bool active = false;
-    private Animator mineAnim;
+    protected float explosionTimer;
+    protected bool active = false;
+    protected Animator mineAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class MineController : MonoBehaviour
         
     }
 
-    public void Explode()
+    public virtual void Explode()
     {
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         DestroyMine();
