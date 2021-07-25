@@ -33,6 +33,7 @@ public class BoomerangBullet : BulletBase
         if (fired && collidedWith.gameObject.tag != "Player")
         {
             //Detect if player, enemy, or something else
+
             CleanUp();
         }
     }

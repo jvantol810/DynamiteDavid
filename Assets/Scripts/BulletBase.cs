@@ -12,6 +12,7 @@ public class BulletBase : MonoBehaviour, IBullet
     public GameObject spriteObject;
     //Speed: how fast the bullet will travel
     [Header("IBullet Properties")]
+    public float damage;
     [SerializeField]
     float _speed;
     public float speed { get { return _speed;  } set { _speed = speed; } }
@@ -160,13 +161,37 @@ public class BulletBase : MonoBehaviour, IBullet
     {
         if (fired)
         {
-            if (tagsAffected.Contains(collidedWith.tag))
+            if (tagsAffected.Contains(collidedWith.gameObject.tag))
             {
                 //Detect if player, enemy, or something else
+                DealDamage(collidedWith.gameObject, damage);
                 CleanUp();
             }
             
         }
+    }
+
+    public virtual void CollidedWithEnemyTag(string tag)
+    {
+        
+    }
+
+    public virtual void CollidedWithPlayerTag(string tag)
+    {
+
+    }
+
+    public virtual void DealDamage(GameObject collidedObject, float damagedealt)
+    {
+        if(collidedObject.TryGetComponent(out PlayerStats playerStats))
+        {
+            playerStats.takeDamage(damagedealt);
+        }
+        if(collidedObject.TryGetComponent(out SunBoss sunBossStats))
+        {
+            sunBossStats.takeDamage(damagedealt);
+        }
+        //Repeat this for any unique stat script that you need!
     }
     
 }

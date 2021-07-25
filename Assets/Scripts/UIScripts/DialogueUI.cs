@@ -40,7 +40,7 @@ public class DialogueUI : MonoBehaviour
     void Start()
     {
         InitializeDialogue();
-        StartCoroutine(OnReadStateReached());
+        //StartCoroutine(OnReadStateReached());
     }
 
     // Update is called once per frame
@@ -144,6 +144,9 @@ public class DialogueUI : MonoBehaviour
         
     }
 
-    
+    public void StartDialogue()
+    {
+        StartCoroutine(OnReadStateReached());
+    }
 
 }
