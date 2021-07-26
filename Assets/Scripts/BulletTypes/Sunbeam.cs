@@ -67,10 +67,14 @@ public class Sunbeam : BulletBase
             else if (timeLeft < 0f)
             {
                 timeLeft = 0f;
+                timePast = 0f;
+                gameObject.SetActive(false);
             }
             else
             {
-                CleanUp();
+                gameObject.SetActive(false);
+                timePast = 0f;
+
             }
             UpdateBeam();
         }
@@ -119,5 +123,12 @@ public class Sunbeam : BulletBase
             transform.localScale = new Vector2(2f, 14f);
         }
         
+    }
+    
+    public override void Fire()
+    {
+        timePast = 0f;
+        timeLeft = duration;
+        fired = true;
     }
 }
