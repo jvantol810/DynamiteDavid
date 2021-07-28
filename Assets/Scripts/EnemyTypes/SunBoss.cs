@@ -8,6 +8,11 @@ public class SunBoss : MonoBehaviour, IEntityStats
     public DialogueUI bossDialogue;
     public BossHealthUI BHealthUI;
     public GameObject[] sunBeamBulletPatterns;
+    public Sprite normalSprite;
+    public Sprite attackingSprite;
+    public Sprite hurtSprite;
+    public Sprite deadSprite;
+    public GameObject supernovaFlash;
     private bool dead;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
@@ -56,7 +61,9 @@ public class SunBoss : MonoBehaviour, IEntityStats
         if(!dead)
         {
             dead = true;
-            bossDialogue.StartDialogue();
+            StopAllCoroutines();
+            StartCoroutine(EndBoss());
+            
         }
         
     }
@@ -73,17 +80,37 @@ public class SunBoss : MonoBehaviour, IEntityStats
     // Update is called once per frame
     void Update()
     {
+        if(!dead)
+        {
         currentDamageColor = new Color(1f, colorScale, colorScale, 1f);
         if(damageEffectActive)
         {
             UpdateDamageEffectTimer();
             sr.color = new Color(1f, .4f, .4f, 1f);
+            sr.sprite = hurtSprite;
         }
         else
         {
             if (sr.color != currentDamageColor)
             {
                 sr.color = currentDamageColor;
+            }
+            if(attackPhase == "None")
+            {
+                sr.sprite = normalSprite;
+            }
+            else
+            {
+                sr.sprite = attackingSprite;
+            }
+        }
+        }
+        else
+        {
+            if(supernovaFlash.activeInHierarchy)
+            {
+                supernovaFlash.transform.localScale = supernovaFlash.transform.localScale + (new Vector3(1f, 1f, 1f) * Time.deltaTime);
+                supernovaFlash.transform.Rotate(new Vector3(0f, 0f, Time.deltaTime * 30f));
             }
         }
         transform.position = Vector2.Lerp(transform.position, patternPos, Time.deltaTime * 3f);
@@ -109,13 +136,34 @@ public class SunBoss : MonoBehaviour, IEntityStats
         yield return new WaitForSeconds(0.4f);
         currentAttackPattern.GetComponent<CirclePattern>().FireFromObject();
         yield return new WaitForSeconds(5f);
-        patternPos = new Vector3(0f, 3f, 0f);
         currentAttackPattern.SetActive(false);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
+        patternPos = new Vector3(0f, 3f, 0f);
+        attackPhase = "None";
+        yield return new WaitForSeconds(3.5f);
         if (health > 0f)
         {
             StartCoroutine(NextAttackPhase());
         }
     }
 
+    private IEnumerator EndBoss()
+    {
+        DisableAttacks();
+        yield return new WaitForSeconds(1.4f);
+        patternPos = new Vector3(0f, 3f, 0f);
+        yield return new WaitForSeconds(1f);
+        sr.sprite = deadSprite;
+        bossDialogue.StartDialogue();
+        supernovaFlash.SetActive(true);
+
+    }
+
+    private void DisableAttacks()
+    {
+        for(int i = 0; i < sunBeamBulletPatterns.Length; i++)
+        {
+            sunBeamBulletPatterns[i].SetActive(false);
+        }
+    }
 }
