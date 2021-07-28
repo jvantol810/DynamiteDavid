@@ -49,6 +49,8 @@ public class PlayerStats : MonoBehaviour, IEntityStats
     public void die()
     {
         Debug.Log("PLAYER DIED");
+        GameObject gameOverUI = GameObject.Find("GameOverExplosion");
+        gameOverUI.GetComponent<GameOverUI>().ToggleGameOver();
     }
 
     /*METHODS NOT INCLUDED IN ENTITY STATS INTERFACE*/
