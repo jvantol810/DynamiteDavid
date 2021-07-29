@@ -28,7 +28,7 @@ public class BulletPattern : MonoBehaviour
 
     public virtual IEnumerator Fire()
     {
-        Debug.Log("FIRED PATTERN!");
+        
         while (numberOfLoops > 0)
         {
             int angleStep = endAngle / pool.poolSize;
@@ -43,4 +43,5 @@ public class BulletPattern : MonoBehaviour
             numberOfLoops--;
         }
     }
+
 }
