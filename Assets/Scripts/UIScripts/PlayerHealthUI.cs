@@ -7,12 +7,14 @@ public class PlayerHealthUI : MonoBehaviour
 {
     [Header("Public Variables")]
     public float lerpSpeed = 2f;
+    public GameObject gameOverExplosion;
     //fuseMask: Resized by scale, the fuse is the bar for the health.
     [Header("UI Children")]
     [SerializeField]
     GameObject fuseMask;
     [SerializeField]
     GameObject fuseFlame;
+    
 
     //playerHealth: The last known current health of the player, expected to be updated when player takes damage.
     //playerMaxHealth: The last known max health of the player, used to calculate the percentage of health.
@@ -25,6 +27,8 @@ public class PlayerHealthUI : MonoBehaviour
     float playerHealth;
     [SerializeField]
     float playerMaxHealth;
+    [SerializeField]
+    bool gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -37,21 +41,22 @@ public class PlayerHealthUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         difference = currentBar - playerHealth;
         currentBar = Mathf.Lerp(currentBar, playerHealth, Time.deltaTime * lerpSpeed * 3);
         if (difference > 0.001f || difference < -0.001f)
         {
             Vector2 current = fuseMask.GetComponent<RectTransform>().sizeDelta;
             Vector2 newSize = new Vector2(128f * (playerHealth / playerMaxHealth), 8f);
-            fuseMask.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(current, newSize, Time.deltaTime * lerpSpeed);
-            if(difference > 0f)
+            fuseMask.GetComponent<RectTransform>().sizeDelta = Vector2.Lerp(current, newSize, Time.deltaTime * lerpSpeed * 3);
+            if (difference > 0f)
             {
                 fuseFlame.SetActive(true);
             }
         }
         else
         {
-            if(fuseFlame.activeInHierarchy)
+            if (fuseFlame.activeInHierarchy)
             {
                 fuseFlame.SetActive(false);
             }

@@ -104,7 +104,7 @@ public class Sunbeam : BulletBase
         if(timePast < endFadeInAt)
         {
             sr.color = new Color(.8f, .8f, .8f, timePast / (endFadeInAt * 1.40f));
-            transform.localScale = new Vector2(timePast / (endFadeInAt), 14f);
+            transform.localScale = new Vector2(timePast / (endFadeInAt), transform.localScale.y);
             //FadeState = "In";
             canDealDamage = false;
         }
@@ -120,7 +120,7 @@ public class Sunbeam : BulletBase
             sr.color = new Color(1f, 1f, 1f, 1f);
             //FadeState = "Full";
             canDealDamage = true;
-            transform.localScale = new Vector2(2f, 14f);
+            transform.localScale = new Vector2(2f, transform.localScale.y);
         }
         
     }
