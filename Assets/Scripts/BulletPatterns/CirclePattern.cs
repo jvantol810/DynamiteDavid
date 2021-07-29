@@ -69,6 +69,8 @@ public class CirclePattern : BulletPattern
         StartCoroutine(Fire());
     }
 
+  
+
 }
    
 
