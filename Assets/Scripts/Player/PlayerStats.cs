@@ -26,12 +26,14 @@ public class PlayerStats : MonoBehaviour, IEntityStats
 
     /*ENTITY STATS INTERFACE METHODS*/
     public void takeDamage(float damage) {
+        Debug.Log("Player took damage!");
         if(_health - damage <= 0)
         {
             _health = 0f;
             die();
         }
         _health -= damage;
+        Debug.Log("Health: " + _health + "/" + _maxHealth);
         healthUI.SetCurrentHealth(_health);
     }
     public void heal(float amount) {

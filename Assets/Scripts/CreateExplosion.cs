@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Experimental.Rendering.Universal;
 public class CreateExplosion : MonoBehaviour
 {
     public GameObject explosionObject;
+    public Light2D light;
     public Vector2 scaleVector = new Vector2(1, 1);
-    public Vector2 finalSize;
+    public Vector2 finalSize = new Vector2(2, 2);
     public List<string> entityTagsAffected;
     public bool exploding = true;
     public float damage;
 
+    private void Start()
+    {
+
+    }
     private void Update()
     {
         if (exploding)
@@ -36,6 +41,7 @@ public class CreateExplosion : MonoBehaviour
         {
             explosionObject.transform.localScale += new Vector3(0, scaleVector.y * Time.deltaTime, 0);
         }
+        light.pointLightOuterRadius = explosionObject.transform.localScale.x + scaleVector.x;
         if (explosionObject.transform.localScale.x >= finalSize.x && explosionObject.transform.localScale.y >= finalSize.y)
         {
             EndExplosion();
@@ -46,4 +52,6 @@ public class CreateExplosion : MonoBehaviour
         exploding = false;
         gameObject.SetActive(false);
     }
+
+
 }

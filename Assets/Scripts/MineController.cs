@@ -6,16 +6,24 @@ public class MineController : MonoBehaviour
 {
     public float timeTillExplode;
     public Sprite activeSprite;
+    public Sprite inactiveSprite;
     public GameObject explosionPrefab;
     public List<string> entityTagsAffected;
-    protected float explosionTimer;
-    protected bool active = false;
+    [HideInInspector]
+    public float explosionTimer;
+    public bool active = false;
     protected Animator mineAnim;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+    }
     void Start()
     {
         explosionTimer = timeTillExplode;
+        
         mineAnim = GetComponent<Animator>();
         mineAnim.SetBool("active", false);
     }
@@ -28,7 +36,7 @@ public class MineController : MonoBehaviour
         }
     }
 
-    private void ActivateMine()
+    public void ActivateMine()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = activeSprite;
         active = true;

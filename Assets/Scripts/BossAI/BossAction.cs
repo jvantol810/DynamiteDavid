@@ -5,8 +5,6 @@ using UnityEngine;
 public class BossAction : MonoBehaviour
 {
     public float duration;
-    public Vector2 moveDirection;
-    public float moveSpeed;
 
     public CirclePattern bulletPattern;
     public GameObject spawnPrefab;
@@ -15,12 +13,18 @@ public class BossAction : MonoBehaviour
     {
         if (spawnPrefab != null)
         {
-            GameObject newObj = Instantiate(spawnPrefab);
-            newObj.transform.position = spawnPoint.position;
+            GameObject obj = Instantiate(spawnPrefab);
+            obj.transform.position = spawnPoint.position;
+            obj.TryGetComponent<MineController>(out MineController mine);
+            if (mine != null)
+            {
+                mine.active = false;
+            }
         }
         if (bulletPattern != null)
         {
             yield return bulletPattern.Fire();
         }
+        
     }
 }

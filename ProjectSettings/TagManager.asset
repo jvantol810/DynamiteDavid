@@ -8,6 +8,7 @@ TagManager:
   - Reticle
   - Enemy
   - PlayerHUI
+  - Mine
   layers:
   - Default
   - TransparentFX

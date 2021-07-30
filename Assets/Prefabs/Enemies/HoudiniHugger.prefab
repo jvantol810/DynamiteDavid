@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3020901282902315900}
   - component: {fileID: -1906736505869851079}
   - component: {fileID: 4303212651047382358}
+  - component: {fileID: 5433996484647255438}
   m_Layer: 0
   m_Name: HoudiniHugger
   m_TagString: Enemy
@@ -158,3 +159,24 @@ PolygonCollider2D:
       - {x: 0.19, y: -0.53}
       - {x: 0.32999998, y: -0.41}
       - {x: 0.39, y: -0.29999998}
+--- !u!50 &5433996484647255438
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486411391084621226}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -45,6 +45,7 @@ public class PlayerShoot : ShootBase
     private void InitializeBulletPool()
     {
         bulletPool.poolSize = maxAmmo;
+        
         bulletPoolObject.SetActive(true);
     }
 

@@ -79,6 +79,8 @@ public class BulletBase : MonoBehaviour, IBullet
         _bulletSprite = bsprite;
         _fireImmediately = fireNow;
     }
+
+    
     public void InitializeInterface(float spd, int ang, Sprite bsprite, bool fireNow)
     {
         _speed = spd;
@@ -127,7 +129,7 @@ public class BulletBase : MonoBehaviour, IBullet
         }
         if (fired)
         {
-            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
+            transform.Translate(Vector3.up * _speed * Time.deltaTime, Space.Self);
         }
     }
 
@@ -187,11 +189,28 @@ public class BulletBase : MonoBehaviour, IBullet
         {
             playerStats.takeDamage(damagedealt);
         }
-        if(collidedObject.TryGetComponent(out SunBoss sunBossStats))
+        else if(collidedObject.TryGetComponent(out SunBoss sunBossStats))
         {
             sunBossStats.takeDamage(damagedealt);
         }
+        else if (collidedObject.TryGetComponent(out IEntityStats entityStats))
+        {
+            entityStats.takeDamage(damagedealt);
+        }
+        else if (collidedObject.TryGetComponent(out MineController mine))
+        {
+            if(mine.active == true)
+            {
+                mine.explosionTimer--;
+            }
+            else
+            {
+                mine.ActivateMine();
+            }
+            
+        }
         //Repeat this for any unique stat script that you need!
     }
+
     
 }

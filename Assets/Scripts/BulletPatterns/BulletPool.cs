@@ -15,7 +15,6 @@ public class BulletPool : MonoBehaviour
     public int angle;
     public Sprite sprite;
     public bool fireNow;
-
     private int bulletIndex = 0;
     private List<GameObject> pool;
 

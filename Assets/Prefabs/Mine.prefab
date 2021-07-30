@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3437978339328098359}
   - component: {fileID: 5586930823341795214}
   - component: {fileID: 6019733386269618318}
+  - component: {fileID: 8301305820675721793}
   m_Layer: 0
   m_Name: Mine
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,10 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTillExplode: 5
-  activeSprite: {fileID: 21300000, guid: 7b86a539750e1a44ca7ec5b7f690babd, type: 3}
+  activeSprite: {fileID: 21300000, guid: a9d410807738b1046a52d61eeacc692d, type: 3}
+  inactiveSprite: {fileID: 21300000, guid: 422192cd9ccc4b74bada335aaba606f7, type: 3}
   explosionPrefab: {fileID: 3684621568823528642, guid: e7659d9f1fa88194e833213326958c05, type: 3}
   entityTagsAffected:
   - Player
+  active: 0
 --- !u!61 &5586930823341795214
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,3 +150,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &8301305820675721793
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3437978339328098360}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

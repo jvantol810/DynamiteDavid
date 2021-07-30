@@ -31,7 +31,7 @@ public class Hugger : MonoBehaviour, IEntityStats
 
     public void die()
     {
-        Debug.Log("MOB DIED");
+        Destroy(gameObject);
     }
 
     /*METHODS NOT INCLUDED IN ENTITY STATS INTERFACE*/

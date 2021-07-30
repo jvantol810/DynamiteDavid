@@ -8,53 +8,48 @@ public class BossPath : MonoBehaviour
     public float speed;
     
     private List<Vector2> destinations;
+    private Vector2 currentDistance;
     private Vector2 currentDest;
-    private int i = 0;
+    private int currentDistanceIndex = 0;
     public void Awake()
     {
-        destinations = new List<Vector2>();
-        foreach (Vector2 distance in distances)
-        {
-            destinations.Add(transform.position - (Vector3)distance);
-        }
-        currentDest = destinations[i];
-        
+        currentDistance = distances[currentDistanceIndex];
     }
 
     public void Start()
     {
-        StartCoroutine(MoveAlongPath());
+        currentDest = transform.position + (Vector3)currentDistance;
     }
 
-
-    public IEnumerator MoveAlongPath()
+    public void Update()
     {
-        if(currentDest != Vector2.zero)
+        currentDistance = distances[currentDistanceIndex];
+        MoveAlongPath();
+        if(transform.position == (Vector3)currentDest)
         {
-            // Loop until we're within Unity's vector tolerance of our target.
-            while (transform.position != (Vector3)currentDest)
-            {
-
-                // Move one step toward the target at our given speed.
-                transform.position = Vector2.MoveTowards(
-                      transform.position,
-                      currentDest,
-                      speed * Time.deltaTime
-                 );
-
-                // Wait one frame then resume the loop.
-                yield return null;
-            }
-
-            // We have arrived. Ensure we hit it exactly.
-            transform.position = currentDest;
-            i++;
-            currentDest = destinations[i];
-            Debug.Log("Destinations " + currentDest);
-            yield return MoveAlongPath();
+            updateCurrentDistance();
         }
     }
+    public void MoveAlongPath()
+    {
+        // Move one step toward the target at our given speed.
+        transform.position = Vector2.MoveTowards(transform.position, currentDest, Time.deltaTime * speed);
+    }
 
+    public void updateCurrentDistance()
+    {
+        if(currentDistanceIndex + 1 >= distances.Count)
+        {
+            currentDistanceIndex = 0;
+        }
+        else
+        {
+            currentDistanceIndex++;
+        }
+        currentDistance = distances[currentDistanceIndex];
+        currentDest = transform.position + (Vector3)currentDistance;
+
+    }
     
 
 }
