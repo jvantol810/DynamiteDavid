@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 7319935314029821755}
   m_Layer: 0
   m_Name: ShooterHugger
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   damage: 1
-  _health: 0
-  _maxHealth: 0
+  _health: 10
+  _maxHealth: 10
 --- !u!212 &7568695325383335628
 SpriteRenderer:
   m_ObjectHideFlags: 0

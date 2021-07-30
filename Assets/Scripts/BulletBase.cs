@@ -191,6 +191,19 @@ public class BulletBase : MonoBehaviour, IBullet
         {
             sunBossStats.takeDamage(damagedealt);
         }
+        if(collidedObject.TryGetComponent(out Hugger huggerStats))
+        {
+            huggerStats.takeDamage(damagedealt);
+        }
+        if(collidedObject.TryGetComponent(out HoudiniHugger houdiniHuggerStats))
+        {
+            houdiniHuggerStats.takeDamage(damagedealt);
+        }
+        if(collidedObject.TryGetComponent(out BoomBoxAI boomBox))
+        {
+            boomBox.takeDamage(damagedealt);
+        }
+        
         //Repeat this for any unique stat script that you need!
     }
     
