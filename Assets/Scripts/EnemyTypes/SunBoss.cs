@@ -8,6 +8,7 @@ public class SunBoss : MonoBehaviour, IEntityStats
     public DialogueUI bossDialogue;
     public BossHealthUI BHealthUI;
     public GameObject[] sunBeamBulletPatterns;
+    public int lastBulletPatternUsed;
     public Sprite normalSprite;
     public Sprite attackingSprite;
     public Sprite hurtSprite;
@@ -75,6 +76,7 @@ public class SunBoss : MonoBehaviour, IEntityStats
         BHealthUI.SetMaxHealth(health);
         BHealthUI.SetCurrentHealth(health);
         StartCoroutine(NextAttackPhase());
+        lastBulletPatternUsed = -1;
     }
 
     // Update is called once per frame
@@ -128,7 +130,9 @@ public class SunBoss : MonoBehaviour, IEntityStats
 
     private IEnumerator NextAttackPhase()
     {
-        GameObject currentAttackPattern = sunBeamBulletPatterns[Random.Range(0, sunBeamBulletPatterns.Length)];
+        int randRoll = ReturnNewSkill();
+        lastBulletPatternUsed = randRoll;
+        GameObject currentAttackPattern = sunBeamBulletPatterns[randRoll];
         attackPhase = currentAttackPattern.name;
         
         currentAttackPattern.SetActive(true);
@@ -165,5 +169,16 @@ public class SunBoss : MonoBehaviour, IEntityStats
         {
             sunBeamBulletPatterns[i].SetActive(false);
         }
+    }
+
+    private int ReturnNewSkill()
+    {
+        int roll;
+        //int roll = Random.Range(0, sunBeamBulletPatterns.Length);
+        do
+        {
+            roll = Random.Range(0, sunBeamBulletPatterns.Length);
+        } while (roll == lastBulletPatternUsed);
+        return roll;
     }
 }
