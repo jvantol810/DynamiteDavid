@@ -30,10 +30,10 @@ public class BoomerangBullet : BulletBase
 
     public override void onTriggerEnter2D(Collider2D collidedWith)
     {
-        if (fired && collidedWith.gameObject.tag != "Player")
+        if (tagsAffected.Contains(collidedWith.gameObject.tag))
         {
             //Detect if player, enemy, or something else
-
+            DealDamage(collidedWith.gameObject, damage);
             CleanUp();
         }
     }

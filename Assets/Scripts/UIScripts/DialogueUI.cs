@@ -114,7 +114,7 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator OnReadStateReached()
     {
-        if(linesPointer <= linesToRead)
+        if(linesPointer < linesToRead)
         {
             yield return new WaitForSeconds(1f);
             dialogueSpeaker.text = dialogueLines[linesPointer].speaker;

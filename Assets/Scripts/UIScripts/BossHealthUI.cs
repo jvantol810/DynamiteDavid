@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossHealthUI : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BossHealthUI : MonoBehaviour
     [Header("UI Children")]
     [SerializeField]
     GameObject bar;
+    [SerializeField]
+    GameObject label;
 
     //playerHealth: The last known current health of the player, expected to be updated when player takes damage.
     //playerMaxHealth: The last known max health of the player, used to calculate the percentage of health.
@@ -27,6 +30,7 @@ public class BossHealthUI : MonoBehaviour
     void Start()
     {
         bar = transform.Find("BossBar").gameObject;
+        label = transform.Find("Label").gameObject;
     }
 
     // Update is called once per frame
@@ -50,5 +54,10 @@ public class BossHealthUI : MonoBehaviour
     public void SetCurrentHealth(float health)
     {
         bossHealth = health;
+    }
+
+    public void SetLabel(string labelTo)
+    {
+        label.GetComponent<Text>().text = labelTo;
     }
 }

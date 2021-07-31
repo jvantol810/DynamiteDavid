@@ -36,20 +36,26 @@ public class SunBoss : MonoBehaviour, IEntityStats
     private string attackPhase;
     [SerializeField]
     private Vector3 patternPos;
+
+    bool fightStarted;
     //Scale from 1f, 1f, 1f, 1f to 1f, .6f, .6f, 1f
 
     /*ENTITY STATS INTERFACE METHODS*/
     public void takeDamage(float damage)
     {
-        if (_health - damage <= 0)
+        if(fightStarted)
         {
-            die();
+            if (_health - damage <= 0)
+            {
+                die();
+            }
+            _health -= damage;
+            damageEffectTimer = .2f;
+            damageEffectActive = true;
+            BHealthUI.SetCurrentHealth(health);
+            colorScale = .6f + (0.4f * 1 / (maxHealth / health));
         }
-        _health -= damage;
-        damageEffectTimer = .2f;
-        damageEffectActive = true;
-        BHealthUI.SetCurrentHealth(health);
-        colorScale = .6f + (0.4f * 1 / (maxHealth / health));
+        
     }
 
     public void heal(float amount)
@@ -72,17 +78,19 @@ public class SunBoss : MonoBehaviour, IEntityStats
     // Start is called before the first frame update
     void Start()
     {
+        
+        fightStarted = false;
         sr = GetComponent<SpriteRenderer>();
         BHealthUI.SetMaxHealth(health);
         BHealthUI.SetCurrentHealth(health);
-        StartCoroutine(NextAttackPhase());
         lastBulletPatternUsed = -1;
+        StartCoroutine(Intro());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!dead)
+        if(!dead && fightStarted)
         {
         currentDamageColor = new Color(1f, colorScale, colorScale, 1f);
         if(damageEffectActive)
@@ -180,5 +188,14 @@ public class SunBoss : MonoBehaviour, IEntityStats
             roll = Random.Range(0, sunBeamBulletPatterns.Length);
         } while (roll == lastBulletPatternUsed);
         return roll;
+    }
+
+    private IEnumerator Intro()
+    {
+        yield return new WaitForSeconds(.1f);
+        bossDialogue.StartDialogue();
+        yield return new WaitForSeconds(6f);
+        fightStarted = true;
+        StartCoroutine(NextAttackPhase());
     }
 }
