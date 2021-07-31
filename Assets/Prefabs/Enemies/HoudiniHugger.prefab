@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   damage: 1
-  _health: 0
-  _maxHealth: 0
+  _health: 10
+  _maxHealth: 10
   durationVisible: 3
   durationInvisible: 5
 --- !u!114 &-1906736505869851079

@@ -175,6 +175,8 @@ GameObject:
   - component: {fileID: 8261983566089581186}
   - component: {fileID: 4214039847843113542}
   - component: {fileID: 3097607441269383044}
+  - component: {fileID: 8768504907222802011}
+  - component: {fileID: 3722157869418049221}
   m_Layer: 0
   m_Name: SentryShooter
   m_TagString: Enemy
@@ -286,3 +288,40 @@ PolygonCollider2D:
       - {x: 0.28137425, y: 0.022570426}
       - {x: 0.24368393, y: 0.057242334}
       - {x: 0.10910998, y: 0.15516558}
+--- !u!50 &8768504907222802011
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633643920934701188}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &3722157869418049221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633643920934701188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4e9f4588e1ae6439411149f948d07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  damage: 0
+  _health: 35
+  _maxHealth: 35

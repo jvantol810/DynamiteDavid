@@ -210,16 +210,15 @@ public class BulletBase : MonoBehaviour, IBullet
             }
             
         }
-
-        if(collidedObject.TryGetComponent(out Hugger huggerStats))
+        else  if(collidedObject.TryGetComponent(out Hugger huggerStats))
         {
             huggerStats.takeDamage(damagedealt);
         }
-        if(collidedObject.TryGetComponent(out HoudiniHugger houdiniHuggerStats))
+        else if(collidedObject.TryGetComponent(out HoudiniHugger houdiniHuggerStats))
         {
             houdiniHuggerStats.takeDamage(damagedealt);
         }
-        if(collidedObject.TryGetComponent(out BoomBoxAI boomBox))
+        else if(collidedObject.TryGetComponent(out BoomBoxAI boomBox))
         {
             boomBox.takeDamage(damagedealt);
         }

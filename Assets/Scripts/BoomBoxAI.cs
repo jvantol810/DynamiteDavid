@@ -15,21 +15,25 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     public Sprite angrySprite;
     public Sprite deathSprite;
     
-    [Header("Firing Positions")]
+    [Header("Positions")]
     public GameObject leftSpeaker;
     public GameObject rightSpeaker;
     public GameObject tape;
+    public GameObject leftSpawn;
+    public GameObject rightSpawn;
     [Header("Bullet pools")]
     public BulletPool leftPool;
     public BulletPool rightPool;
     public BulletPool tapePool;
-        
+    [Header("Stats")]    
     public float speed = 2;
     public float _health;
     public float _maxHealth;
-
-    private bool inSequence;
+    
+    private int num;
+    public bool inSequence;
     private bool angryState = false;
+    //private 
 
     public void Start()
     {
@@ -41,8 +45,17 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     {
         //If under 50% health enrage
         if (health <= (maxHealth * .5f))
+        {
             angryState = true;
-       
+            sp.sprite = angrySprite;
+            leftPool.speed = 6;
+            rightPool.speed = 6;
+            tapePool.speed = 6;
+            
+            StopAllCoroutines();
+            bossDialogue.StartDialogue();
+        }
+
         AILoop();
     }
     public float health { get { return _health; } set { _health = health; } }
@@ -54,8 +67,8 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
         if(inSequence)
             return;
         //If enraged fire from bigger set of patterns
-        if(angryState)
-            FirePatterns(true);
+        //if(angryState)
+        //    FirePatterns(true);
         
         //Fire from regular patterns
         FirePatterns(false);
@@ -63,20 +76,32 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     private void FirePatterns(bool angry)
     {
-        if (angry)
+    //    if (angry)
+    //    {
+            //Special patterns if time
+    //    }
+        
+        //Choose a pattern at random
+        num = Random.Range(1,4);
+        switch (num)
         {
-            sp.sprite = angrySprite;
-            leftPool.speed = 6;
-            rightPool.speed = 6;
-            tapePool.speed = 6;
+            case 1:
+                StartCoroutine(SpeakerRings());
+                break;
+            
+            case 2:
+                StartCoroutine(IncrementSpray());
+                break;
+            
+            case 3:
+                StartCoroutine(SentryBarrier());
+                break;
         }
-
-        StartCoroutine(IncrementSpray());
 
     }
 
     //Settings to fire 180 burst all at once single loop. .05 feels good if delayed desired though
-    private void SetCircleSettings(CirclePattern settings,bool reverse, bool delay, int minStep, int maxStep, int ringsize, int start=90, int howFar=180)
+    private void SetCircleSettings(CirclePattern settings,bool reverse, bool delay, int minStep, int maxStep, int ringsize, int start=90, int howFar=180, float shotDelay=.1f)
     {
         
         settings.startAngle =start;
@@ -95,7 +120,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
         settings.shotDelay = 0;
         if (delay)
         {
-            settings.shotDelay = .1f;
+            settings.shotDelay = shotDelay;
         }
         settings.ringDelay = 0; 
         settings.numberOfRings = 1;
@@ -104,6 +129,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     private IEnumerator SpeakerRings()
     {
+        if(inSequence){yield break;}
         inSequence = true;
         int loops = 0;
         while (loops < 5)
@@ -122,6 +148,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     private IEnumerator IncrementSpray()
     {
+        if(inSequence){yield break;}
         inSequence = true;
         
         SetCircleSettings(leftSpeaker.GetComponent<CirclePattern>(),false,true,1,1,30,90,110);
@@ -154,9 +181,19 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     private IEnumerator SentryBarrier()
     {
-        // . . . . . 
-        //o  . | x | . o
-        return null;
+        if(inSequence){yield break;}
+        inSequence = true;
+        
+        SetCircleSettings(leftSpeaker.GetComponent<CirclePattern>(),false,true,1,1,90,180,0, .3f);
+        SetCircleSettings(rightSpeaker.GetComponent<CirclePattern>(), false, true, 1, 1,90, 180,0, .3f);
+        leftSpeaker.GetComponent<CirclePattern>().FireFromObject();
+        rightSpeaker.GetComponent<CirclePattern>().FireFromObject();
+
+        leftSpawn.GetComponent<SpawnPrefab>().Spawn();
+        rightSpawn.GetComponent<SpawnPrefab>().Spawn();
+        yield return new WaitForSeconds(15f);
+
+        inSequence = false;
     }
 
     public void takeDamage(float damage)
@@ -183,7 +220,9 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     public void die()
     {
+        StopAllCoroutines();
         sp.sprite = deathSprite;
+        this.enabled = false;
     }
     
     
