@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - PlayerHUI
   - Mine
+  - Explosion
   layers:
   - Default
   - TransparentFX

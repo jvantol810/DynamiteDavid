@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2525035677860243106}
   m_LocalRotation: {x: -0, y: -0, z: -0.00076806534, w: 0.9999997}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.01, y: -0.74, z: 0}
+  m_LocalScale: {x: 0.47231627, y: 1.1604811, z: 0.94463253}
   m_Children: []
   m_Father: {fileID: 6808941460507001569}
   m_RootOrder: 1
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.4136386, g: 1, b: 0.28773582, a: 1}
+  m_Color: {r: 1, g: 0.21226418, b: 0.9736719, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -217,9 +217,9 @@ GameObject:
   - component: {fileID: 6808941460507001569}
   - component: {fileID: 6808941460507001582}
   - component: {fileID: 6808941460507001583}
-  - component: {fileID: 6808941460507001568}
+  - component: {fileID: 8177062257742007529}
   m_Layer: 0
-  m_Name: MineBullet
+  m_Name: PurpleFaygoBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,8 +233,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6808941460507001580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2518, y: -0.2518, z: 0}
-  m_LocalScale: {x: 0.4965, y: 0.4965, z: 0.4965}
+  m_LocalPosition: {x: -0.2487, y: -0.4243, z: 0}
+  m_LocalScale: {x: 0.4912213, y: 0.15138723, z: 0.15138723}
   m_Children:
   - {fileID: 6808941459687027514}
   - {fileID: 5322572406831153462}
@@ -282,7 +282,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 0.65869033, g: 1, b: 0.48584908, a: 1}
+  m_Color: {r: 0.8402729, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   timeLeft: 0
   firedBy: 
   hasDuration: 0
---- !u!58 &6808941460507001568
-CircleCollider2D:
+--- !u!70 &8177062257742007529
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -331,9 +331,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Offset: {x: -0.020406863, y: -0.714241}
+  m_Size: {x: 0.5102344, y: 2.4284823}
+  m_Direction: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6019733386269618318}
   - component: {fileID: 8301305820675721793}
   m_Layer: 0
-  m_Name: Mine
+  m_Name: BigMine
   m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3437978339328098360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.08, y: -3.1799948, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 13.5189, y: -2.7411, z: 0}
+  m_LocalScale: {x: 1.585244, y: 1.585244, z: 1.585244}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 422192cd9ccc4b74bada335aaba606f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9756192, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   timeTillExplode: 5
   activeSprite: {fileID: 21300000, guid: a9d410807738b1046a52d61eeacc692d, type: 3}
   inactiveSprite: {fileID: 21300000, guid: 422192cd9ccc4b74bada335aaba606f7, type: 3}
-  explosionPrefab: {fileID: 3684621568823528642, guid: e7659d9f1fa88194e833213326958c05, type: 3}
+  explosionPrefab: {fileID: 3684621568823528642, guid: 835bf4170e4105f42b9e5b5782f62d9b, type: 3}
   entityTagsAffected:
   - Player
   - Explosion

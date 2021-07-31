@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4545856939926138213}
   - component: {fileID: 1433604382012090276}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: BigExplosion
   m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0.6570951, b: 0.2688679, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.055834293, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionObject: {fileID: 3684621568823528642}
   light: {fileID: 4545856939926138213}
-  scaleVector: {x: 2.5, y: 2.5}
-  finalSize: {x: 3, y: 3}
+  scaleVector: {x: 3.5, y: 3.5}
+  finalSize: {x: 10, y: 10}
   entityTagsAffected:
   - Player
   - Enemy
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0.7566416, b: 0.23113209, a: 1}
+  m_Color: {r: 0.9960785, g: 0, b: 0.054901965, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000

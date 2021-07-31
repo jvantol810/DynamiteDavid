@@ -64,9 +64,9 @@ public class CirclePattern : BulletPattern
         yield return null;
     }
 
-    public void FireFromObject()
+    public Coroutine FireFromObject()
     {
-        StartCoroutine(Fire());
+        return StartCoroutine(Fire());
     }
 
   

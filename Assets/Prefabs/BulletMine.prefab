@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 9085093728186556391}
   - component: {fileID: 4061559147931798913}
   - component: {fileID: 4396236910498295859}
+  - component: {fileID: 997563289}
   m_Layer: 0
   m_Name: BulletMine
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8030615225478071633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.99975, y: 0.99975, z: 1.9995}
   m_Children:
   - {fileID: 5138067065681092353}
   m_Father: {fileID: 0}
@@ -100,9 +101,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTillExplode: 1
   activeSprite: {fileID: 21300000, guid: 7b86a539750e1a44ca7ec5b7f690babd, type: 3}
+  inactiveSprite: {fileID: 0}
   explosionPrefab: {fileID: 3684621568823528642, guid: e7659d9f1fa88194e833213326958c05, type: 3}
   entityTagsAffected:
   - Player
+  explosionTimer: 0
+  active: 0
 --- !u!61 &4061559147931798913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,6 +152,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &997563289
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030615225478071633}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1569376345853265523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,6 +184,10 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
     - target: {fileID: 5947460424389761394, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.17530261
@@ -180,19 +209,15 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5947460424389761395, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
-      propertyPath: pool
-      value: 
-      objectReference: {fileID: 5138067065681092354}
-    - target: {fileID: 5947460424389761395, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: ringSize
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5947460424389761395, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
-      propertyPath: firePoint
-      value: 
-      objectReference: {fileID: 5138067065681092353}
+      propertyPath: ringDelay
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5947460424389761395, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
-      propertyPath: angleStepMultiplierMax
+      propertyPath: numberOfRings
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -202,14 +227,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5947460424389761394, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
   m_PrefabInstance: {fileID: 1569376345853265523}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5138067065681092354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
-  m_PrefabInstance: {fileID: 1569376345853265523}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 376846eda6c6aa94192ec5bb4c74df05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

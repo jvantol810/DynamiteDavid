@@ -7,26 +7,46 @@ public class BaseBossBehavior : MonoBehaviour
     [System.Serializable]
     public class BossAction
     {
-        public CirclePattern bulletPattern;
+        public List<CirclePattern> bulletPatterns;
         public GameObject spawnPrefab;
         public Transform spawnPoint;
+        public float loops = 1;
         public virtual IEnumerator execute()
         {
-            if (spawnPrefab != null)
+            float loopTime = loops;
+            while(loopTime > 0)
             {
-                GameObject obj = Instantiate(spawnPrefab);
-                obj.transform.position = spawnPoint.position;
-                obj.TryGetComponent<MineController>(out MineController mine);
-                if (mine != null)
+                if (spawnPrefab != null)
                 {
-                    mine.active = false;
+                    GameObject obj = Instantiate(spawnPrefab);
+                    obj.transform.position = spawnPoint.position;
+                    obj.TryGetComponent<MineController>(out MineController mine);
+                    if (mine != null)
+                    {
+                        mine.active = false;
+                        //Find player obj
+                        GameObject player = GameObject.Find("Player");
+                        //Calculate relative position between mine and player
+                        Vector2 dir = obj.transform.position - player.transform.position;
+                        obj.GetComponent<Rigidbody2D>().AddForce(-dir.normalized * 100f);
+                    }
                 }
+                List<Coroutine> activePatterns = new List<Coroutine>();
+                if (bulletPatterns != null)
+                {
+                    foreach(CirclePattern pattern in bulletPatterns)
+                    {
+                        Coroutine c = pattern.FireFromObject();
+                        activePatterns.Add(c);
+                    }
+                    foreach(Coroutine activePattern in activePatterns)
+                    {
+                        yield return activePattern;
+                    }
+                }
+                loopTime--;
+                yield return new WaitForSeconds(0.5f);
             }
-            if (bulletPattern != null)
-            {
-                yield return bulletPattern.Fire();
-            }
-
         }
     }
     public float actionDelay = 1f;
@@ -39,7 +59,8 @@ public class BaseBossBehavior : MonoBehaviour
     [SerializeField]
     public List<ActionChain> actionChains;
     private List<BossAction> currentActionChain;
-    private int currentActionChainIndex = 0;
+    [HideInInspector]
+    public int currentActionChainIndex = 0;
     public List<BossPath> pathChain;
     private int currentPathIndex;
     private int currentActionIndex = 0;
@@ -113,8 +134,11 @@ public class BaseBossBehavior : MonoBehaviour
         currentAction = currentActionChain[currentActionIndex];
     }
 
-    private void nextActionChain()
+    public void nextActionChain()
     {
+        Debug.Log("Next chain: " + currentActionChainIndex + 1);
+        //stop all coroutines in the previous action chain
+        StopCoroutine(executeActions());
         currentActionChainIndex++;
         currentActionChain = actionChains[currentActionChainIndex].chain;
         currentActionIndex = 0;

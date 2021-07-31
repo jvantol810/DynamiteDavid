@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 100
-  bulletPrefab: {fileID: 6808941460507001580, guid: 3d6e2c35124af074aa588cd1de6c74a8, type: 3}
+  bulletPrefab: {fileID: 6808941460507001580, guid: 1f9b01ea523d8b74296b65f56507c7b4, type: 3}
   duration: 0
   speed: 5
   angle: 0
@@ -64,13 +64,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pool: {fileID: 5947460424389761393}
+  firePoint: {fileID: 5947460424389761394}
   startAngle: 0
   endAngle: 360
   angleStepMultiplierMin: 1
-  angleStepMultiplierMax: 6
+  angleStepMultiplierMax: 5
   numberOfLoops: 1
   loopDelay: 1
   shotDelay: 0
-  numberOfRings: 3
+  numberOfRings: 1
   ringDelay: 0
-  ringSize: 60
+  ringSize: 100

@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolSize: 5
-  bulletPrefab: {fileID: 6808941460507001580, guid: 3d6e2c35124af074aa588cd1de6c74a8, type: 3}
+  bulletPrefab: {fileID: 6808941460507001580, guid: 2856fcfa04a29b841a2a6296199d6a55, type: 3}
   duration: 0
-  speed: 5
+  speed: 6
   angle: 0
   sprite: {fileID: -9095717837082945937, guid: 34587324d412940a79d530020c957dc0, type: 3}
   fireNow: 1

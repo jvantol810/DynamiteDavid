@@ -184,6 +184,7 @@ MonoBehaviour:
   tagsAffected:
   - Enemy
   - Mine
+  - Explosion
   testingEnabled: 0
   directionArrow: {fileID: 214443193331675772}
   spriteObject: {fileID: 9191099507404171237}
