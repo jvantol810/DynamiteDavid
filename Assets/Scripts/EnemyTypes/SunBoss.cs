@@ -14,6 +14,7 @@ public class SunBoss : MonoBehaviour, IEntityStats
     public Sprite hurtSprite;
     public Sprite deadSprite;
     public GameObject supernovaFlash;
+    public GameObject supernovaBoss;
     private bool dead;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
@@ -168,7 +169,10 @@ public class SunBoss : MonoBehaviour, IEntityStats
         sr.sprite = deadSprite;
         bossDialogue.StartDialogue();
         supernovaFlash.SetActive(true);
-
+        yield return new WaitForSeconds(3f);
+        supernovaFlash.SetActive(false);
+        supernovaBoss.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     private void DisableAttacks()

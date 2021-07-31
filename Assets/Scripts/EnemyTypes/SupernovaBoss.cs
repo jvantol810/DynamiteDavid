@@ -13,6 +13,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
     public Sprite attackingSprite;
     public Sprite hurtSprite;
     public Sprite deadSprite;
+    public GameObject supernovaFlash;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
     [SerializeField]
@@ -63,7 +64,12 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
 
     public void die()
     {
+        if(!dead)
+        {
+            StartCoroutine(EndBoss());
+            dead = true;
 
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -101,6 +107,14 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
                 }
             }
         }
+        else
+        {
+            if (supernovaFlash.activeInHierarchy)
+            {
+                supernovaFlash.transform.localScale = supernovaFlash.transform.localScale + (new Vector3(1f, 1f, 1f) * Time.deltaTime);
+                supernovaFlash.transform.Rotate(new Vector3(0f, 0f, Time.deltaTime * 30f));
+            }
+        }
         transform.position = Vector2.Lerp(transform.position, patternPos, Time.deltaTime * 3f);
     }
 
@@ -125,6 +139,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
         patternPos = new Vector3(0f, 3f, 0f);
         fightStarted = true;
         Shield.SetActive(true);
+        yield return new WaitForSeconds(.8f);
         StartCoroutine(NextAttackPhase());
     }
 
@@ -137,6 +152,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
         int randRoll = ReturnNewSkill();
         GameObject currentAttackPattern = novaBulletPatterns[randRoll];
         attackPhase = currentAttackPattern.name;
+        lastBulletPatternUsed = randRoll;
         currentAttackPattern.SetActive(true);
         currentAttackPattern.GetComponent<CirclePattern>().FireFromObject();
         yield return new WaitForSeconds(5f);
@@ -162,7 +178,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
         int roll;
         if(novaBulletPatterns.Length == 1)
         {
-            return 0;
+            //return 0;
         }
         //int roll = Random.Range(0, sunBeamBulletPatterns.Length);
         do
@@ -170,6 +186,25 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
             roll = Random.Range(0, novaBulletPatterns.Length);
         } while (roll == lastBulletPatternUsed);
         return roll;
+    }
+
+    private void DisableAttacks()
+    {
+        for (int i = 0; i < novaBulletPatterns.Length; i++)
+        {
+            novaBulletPatterns[i].SetActive(false);
+        }
+    }
+
+    private IEnumerator EndBoss()
+    {
+        DisableAttacks();
+        yield return new WaitForSeconds(5f);
+        patternPos = new Vector3(0f, 3f, 0f);
+        sr.sprite = deadSprite;
+        yield return new WaitForSeconds(1f);
+        supernovaFlash.SetActive(true);
+        bossDialogue.StartDialogue();
     }
 
 }
