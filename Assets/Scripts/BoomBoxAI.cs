@@ -21,6 +21,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     public GameObject tape;
     public GameObject leftSpawn;
     public GameObject rightSpawn;
+    public GameObject exitSpawn;
     [Header("Bullet pools")]
     public BulletPool leftPool;
     public BulletPool rightPool;
@@ -33,7 +34,8 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     private int num;
     public bool inSequence;
     private bool angryState = false;
-    //private 
+    private bool spoken = false;
+    private bool dead = false;
 
     public void Start()
     {
@@ -51,9 +53,11 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
             leftPool.speed = 6;
             rightPool.speed = 6;
             tapePool.speed = 6;
-            
-            StopAllCoroutines();
-            bossDialogue.StartDialogue();
+            if (spoken == false)
+            {
+                bossDialogue.StartDialogue();
+                spoken = true;
+            }
         }
 
         AILoop();
@@ -66,17 +70,14 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
         //If already doing a pattern don't do another
         if(inSequence)
             return;
-        //If enraged fire from bigger set of patterns
-        //if(angryState)
-        //    FirePatterns(true);
         
         //Fire from regular patterns
-        FirePatterns(false);
+        FirePatterns();
     }
 
-    private void FirePatterns(bool angry)
+    private void FirePatterns()
     {
-    //    if (angry)
+    //    if (angryState)
     //    {
             //Special patterns if time
     //    }
@@ -100,7 +101,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     }
 
-    //Settings to fire 180 burst all at once single loop. .05 feels good if delayed desired though
+    
     private void SetCircleSettings(CirclePattern settings,bool reverse, bool delay, int minStep, int maxStep, int ringsize, int start=90, int howFar=180, float shotDelay=.1f)
     {
         
@@ -220,9 +221,12 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
 
     public void die()
     {
+        if (dead) return;
         StopAllCoroutines();
         sp.sprite = deathSprite;
+        exitSpawn.GetComponent<SpawnPrefab>().Spawn();
         this.enabled = false;
+        dead = true;
     }
     
     
