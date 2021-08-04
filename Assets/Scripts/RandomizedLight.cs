@@ -7,6 +7,8 @@ public class RandomizedLight : MonoBehaviour
 {
     private Light2D light2d;
     public bool SetColorRandomly;
+    //public bool shiftRainbow;
+    //float time;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,10 @@ public class RandomizedLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if(shiftRainbow)
+        //{
+            //time = Mathf.PingPong(Time.time, 1f) / 1f;
+            //light2d.color = Color.Lerp(Color.red, Color.blue, time);
+        //}
     }
 }

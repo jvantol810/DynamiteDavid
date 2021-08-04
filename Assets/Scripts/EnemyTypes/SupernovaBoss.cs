@@ -7,7 +7,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
     public DialogueUI bossDialogue;
     public BossHealthUI BHealthUI;
     public GameObject[] novaBulletPatterns;
-    public GameObject ShockwavePattern;
+    public GameObject NebulaBackground;
     public GameObject Shield;
     public Sprite normalSprite;
     public Sprite attackingSprite;
@@ -132,6 +132,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
     private IEnumerator Intro()
     {
         yield return new WaitForSeconds(.1f);
+        NebulaBackground.SetActive(true);
         BHealthUI.SetLabel("Supernova    ");
         BHealthUI.SetMaxHealth(health);
         BHealthUI.SetCurrentHealth(health);
