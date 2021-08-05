@@ -17,7 +17,10 @@ public class BossStats : MonoBehaviour, IEntityStats
     private BaseBossBehavior behavior;
     public float health { get { return _health; } set { _health = health; } }
     public float maxHealth { get { return _maxHealth; } set { _maxHealth = maxHealth; } }
-
+    public Sprite hurtSprite;
+    public Sprite normalSprite;
+    private float hurtTimer = 0;
+    private bool hurt = false;
     public void Awake()
     {
         behavior = GetComponent<BaseBossBehavior>();
@@ -27,6 +30,7 @@ public class BossStats : MonoBehaviour, IEntityStats
         healthThresholds.Add(10f);
         currentThreshold = healthThresholds[currentThresholdIndex];
         nextThreshold = healthThresholds[nextThresholdIndex];
+        
     }
     public void die()
     {
@@ -48,6 +52,8 @@ public class BossStats : MonoBehaviour, IEntityStats
 
     public void takeDamage(float damage)
     {
+        
+        hurt = true;
         _health -= damage;
         BHealthUI.SetCurrentHealth(health);
         if (_health <= 0)
@@ -80,6 +86,20 @@ public class BossStats : MonoBehaviour, IEntityStats
     // Update is called once per frame
     void Update()
     {
-        
+        if (hurt)
+        {
+            if (hurtTimer > 0)
+            {
+                GetComponent<SpriteRenderer>().sprite = hurtSprite;
+                hurtTimer -= Time.deltaTime;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = normalSprite;
+                hurtTimer = 0.5f;
+                hurt = false;
+            }
+        }
+       
     }
 }

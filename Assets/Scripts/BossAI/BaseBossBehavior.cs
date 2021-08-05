@@ -28,7 +28,8 @@ public class BaseBossBehavior : MonoBehaviour
                         GameObject player = GameObject.Find("Player");
                         //Calculate relative position between mine and player
                         Vector2 dir = obj.transform.position - player.transform.position;
-                        obj.GetComponent<Rigidbody2D>().AddForce(-dir.normalized * 100f);
+                        //obj.GetComponent<Rigidbody2D>().AddForce(-dir.normalized*2f, ForceMode2D.Force);
+                        mine.SlideInDirection(-dir.normalized, 1f);
                     }
                 }
                 List<Coroutine> activePatterns = new List<Coroutine>();

@@ -13,7 +13,9 @@ public class MineController : MonoBehaviour
     public float explosionTimer;
     public bool active = false;
     protected Animator mineAnim;
-
+    private Vector2 slideDirection;
+    public bool sliding = false;
+    private float slideTimer;
     // Start is called before the first frame update
 
     private void Awake()
@@ -57,9 +59,29 @@ public class MineController : MonoBehaviour
                 Explode();
             }
         }
-        
+        if (sliding)
+        {
+            if(slideTimer > 0)
+            {
+                transform.position = Vector2.Lerp(transform.position, transform.position + (Vector3)slideDirection*3f * Random.Range(1, 5), Time.deltaTime);
+                slideTimer-=Time.deltaTime;
+            }
+            else
+            {
+                slideTimer = 0;
+                sliding = false;
+            }
+            
+        }
     }
 
+    
+    public void SlideInDirection(Vector2 direction, float time)
+    {
+        slideDirection = direction;
+        sliding = true;
+        slideTimer = time;
+    }
     public virtual void Explode()
     {
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
