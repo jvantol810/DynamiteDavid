@@ -141,10 +141,17 @@ public class BaseBossBehavior : MonoBehaviour
         Debug.Log("Next chain: " + currentActionChainIndex + 1);
         //stop all coroutines in the previous action chain
         StopCoroutine(executeActions());
-        currentActionChainIndex++;
+        if(currentActionChainIndex + 1 >= actionChains.Count)
+        {
+            currentActionChainIndex = 0;
+        }
+        else
+        {
+            currentActionChainIndex++;
+        }
         currentActionChain = actionChains[currentActionChainIndex].chain;
         currentActionIndex = 0;
-        executeCurrentAction();
+        StartCoroutine(executeActions());
     }
 
  

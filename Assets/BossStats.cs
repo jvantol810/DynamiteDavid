@@ -9,12 +9,14 @@ public class BossStats : MonoBehaviour, IEntityStats
     public float _health;
     [SerializeField]
     public float _maxHealth;
-    private List<float> healthThresholds;
+    [Header("Boss Thresholds")]
+    public List<float> healthThresholds;
     private int currentThresholdIndex = 0;
     private int nextThresholdIndex = 1;
     private float currentThreshold;
     private float nextThreshold;
     private BaseBossBehavior behavior;
+    
     public float health { get { return _health; } set { _health = health; } }
     public float maxHealth { get { return _maxHealth; } set { _maxHealth = maxHealth; } }
     public Sprite hurtSprite;
@@ -24,10 +26,6 @@ public class BossStats : MonoBehaviour, IEntityStats
     public void Awake()
     {
         behavior = GetComponent<BaseBossBehavior>();
-        healthThresholds = new List<float>();
-        healthThresholds.Add(70f);
-        healthThresholds.Add(40f);
-        healthThresholds.Add(10f);
         currentThreshold = healthThresholds[currentThresholdIndex];
         nextThreshold = healthThresholds[nextThresholdIndex];
         
@@ -62,24 +60,51 @@ public class BossStats : MonoBehaviour, IEntityStats
         }
         else if(_health <= currentThreshold)
         {
-            Debug.Log("Current threshold: " + currentThreshold);
-            Debug.Log("Next Threshold: " + nextThreshold);
-            behavior.nextActionChain();
-            if(nextThresholdIndex >= healthThresholds.Count)
-            {
+            
+            //Increment health threshold, checking if it's at the end
+            //if(currentThresholdIndex + 1 < healthThresholds.Count)
+            //{
+            //    currentThresholdIndex++;
+            //}
+            ////Trigger next phase
+            //behavior.nextActionChain();
+            //Debug.Log("Current threshold: " + currentThresholdIndex);
+            //Debug.Log("Next Threshold: " + nextThresholdIndex);
+            //behavior.nextActionChain();
+            
+            //if(nextThresholdIndex + 1 >= healthThresholds.Count)
+            //{
                
-                nextThresholdIndex = 0;
-                Debug.Log("Next threshold set to 0!");
-            }
-            else
-            {
-                nextThresholdIndex++;
-            }
-            currentThresholdIndex++;
-            currentThreshold = healthThresholds[currentThresholdIndex];
-            nextThreshold = healthThresholds[nextThresholdIndex];
-            Debug.Log("After incrementing - Current threshold: " + currentThreshold);
-            Debug.Log("After incrementing - Next Threshold: " + nextThreshold);
+            //    nextThresholdIndex = -1;
+            //}
+            //else
+            //{
+            //    nextThresholdIndex++;
+            //}
+            //if(currentThresholdIndex + 1 >= healthThresholds.Count)
+            //{
+            //    currentThresholdIndex = healthThresholds.Count - 1;
+            //}
+            //else
+            //{
+            //    currentThresholdIndex++;
+            //}
+            //if(currentThresholdIndex != -1)
+            //{
+            //    currentThreshold = healthThresholds[currentThresholdIndex];
+            //}
+            //if(nextThresholdIndex != -1)
+            //{
+            //    nextThreshold = healthThresholds[nextThresholdIndex];
+            //}
+            //if(currentThresholdIndex != -1)
+            //{
+            //    behavior.currentActionChainIndex = currentThresholdIndex;
+            //}
+
+            
+            //Debug.Log("After incrementing - Current threshold: " + currentThresholdIndex);
+            //Debug.Log("After incrementing - Next Threshold: " + nextThresholdIndex);
         }
     }
 
