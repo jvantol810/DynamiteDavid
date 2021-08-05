@@ -86,7 +86,7 @@ public class Followingbeam : BulletBase
             UpdateBeam();
         }
         rotateTo = Quaternion.LookRotation(Vector3.forward, -(player.transform.position - transform.position));
-        transform.rotation = new Quaternion(0f, 0f, Mathf.Lerp(transform.rotation.z, rotateTo.z, Time.deltaTime), transform.rotation.w);
+        transform.rotation = new Quaternion(0f, 0f, Mathf.Lerp(transform.rotation.z, rotateTo.z, Time.deltaTime * 1.5f), transform.rotation.w);
     }
 
     public override void onTriggerEnter2D(Collider2D collidedWith)
@@ -104,7 +104,7 @@ public class Followingbeam : BulletBase
         if (fired && collision.gameObject.tag == "Player" && canDealDamage)
         {
             //Deal damage only!
-            collision.gameObject.GetComponent<PlayerStats>().takeDamage(2 * Time.fixedDeltaTime);
+            collision.gameObject.GetComponent<PlayerStats>().takeDamage(30 * Time.fixedDeltaTime);
         }
     }
 

@@ -95,7 +95,7 @@ public class Sunbeam : BulletBase
         if (fired && collision.gameObject.tag == "Player" && canDealDamage)
         {
             //Deal damage only!
-            collision.gameObject.GetComponent<PlayerStats>().takeDamage(2 * Time.fixedDeltaTime);
+            collision.gameObject.GetComponent<PlayerStats>().takeDamage(20 * Time.fixedDeltaTime);
         }
     }
 
