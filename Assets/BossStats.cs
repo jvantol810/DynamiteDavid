@@ -21,6 +21,7 @@ public class BossStats : MonoBehaviour, IEntityStats
     public float maxHealth { get { return _maxHealth; } set { _maxHealth = maxHealth; } }
     public Sprite hurtSprite;
     public Sprite normalSprite;
+    public Sprite epicSprite;
     private float hurtTimer = 0;
     private bool hurt = false;
     public void Awake()
@@ -120,7 +121,15 @@ public class BossStats : MonoBehaviour, IEntityStats
             }
             else
             {
-                GetComponent<SpriteRenderer>().sprite = normalSprite;
+                if(health <= 22)
+                {
+                    GetComponent<SpriteRenderer>().sprite = epicSprite;
+                }
+                else
+                {
+                    GetComponent<SpriteRenderer>().sprite = normalSprite;
+                }
+                
                 hurtTimer = 0.5f;
                 hurt = false;
             }

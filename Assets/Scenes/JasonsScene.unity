@@ -678,7 +678,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 371593354798995731, guid: 293639fa633ab7447824c345e8ed6b9b, type: 3}
       propertyPath: m_Text
-      value: SUN???
+      value: Minelayer, Layer of Mines
+      objectReference: {fileID: 0}
+    - target: {fileID: 371593354798995740, guid: 293639fa633ab7447824c345e8ed6b9b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 273.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 371593354798995740, guid: 293639fa633ab7447824c345e8ed6b9b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -88.100006
       objectReference: {fileID: 0}
     - target: {fileID: 2250005708645954580, guid: 293639fa633ab7447824c345e8ed6b9b, type: 3}
       propertyPath: m_Pivot.x
@@ -958,6 +966,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionDelay: 1.5
+  epicAction:
+    bulletPatterns:
+    - {fileID: 1386623571}
+    - {fileID: 1386623568}
+    - {fileID: 1386623563}
+    - {fileID: 1386623561}
+    spawnPrefab: {fileID: 3437978339328098360, guid: cfaab083d3a05aa408b31d91cb8b2c76, type: 3}
+    spawnPoint: {fileID: 1386623559}
+    loops: 100
+  epicSprite: {fileID: 21300000, guid: 43502447830223f49b7dbb5cca63d2f2, type: 3}
   actionChains:
   - random: 0
     chain:
@@ -2024,6 +2042,26 @@ PrefabInstance:
     - target: {fileID: 7149026998456164087, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149027000261729356, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 121.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149027000261729356, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 54.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149027000261729356, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149027000261729356, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.20000076
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149027000261729359, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
+      propertyPath: m_Text
+      value: Dynamite David
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}

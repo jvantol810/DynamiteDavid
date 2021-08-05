@@ -59,6 +59,9 @@ public class BaseBossBehavior : MonoBehaviour
         public List<BossAction> chain;
     }
     [SerializeField]
+    public BossAction epicAction;
+    public Sprite epicSprite;
+    [SerializeField]
     public List<ActionChain> actionChains;
     private List<BossAction> currentActionChain;
     [HideInInspector]
@@ -109,7 +112,16 @@ public class BaseBossBehavior : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(actionDelay);
-                yield return currentActionChain[currentActionIndex].execute();
+                if(GetComponent<BossStats>().health <= 22)
+                {
+                    GetComponent<SpriteRenderer>().sprite = epicSprite;
+                    yield return epicAction.execute();
+                }
+                else
+                {
+                    yield return currentActionChain[currentActionIndex].execute();
+                }
+                
                 nextAction();
             }
             
