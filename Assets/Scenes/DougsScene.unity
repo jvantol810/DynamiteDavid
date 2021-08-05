@@ -12903,7 +12903,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1620833817, guid: c461d43d93741764f8ffcab1c9048753, type: 3}
       propertyPath: _health
-      value: 50
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 1620833817, guid: c461d43d93741764f8ffcab1c9048753, type: 3}
       propertyPath: BHealthUI
@@ -12919,7 +12919,7 @@ PrefabInstance:
       objectReference: {fileID: 516166606}
     - target: {fileID: 1620833817, guid: c461d43d93741764f8ffcab1c9048753, type: 3}
       propertyPath: _maxHealth
-      value: 50
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 1620833817, guid: c461d43d93741764f8ffcab1c9048753, type: 3}
       propertyPath: rightSpawn
