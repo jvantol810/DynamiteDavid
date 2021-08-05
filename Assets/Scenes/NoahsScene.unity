@@ -5844,14 +5844,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 633887850}
     m_Modifications:
-    - target: {fileID: 1273286509400314959, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 7102057737976045532, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7149026998456164072, guid: 3248c70d6936faf4796b00ae8f8d4224, type: 3}
       propertyPath: gameOverExplosion
       value: 
