@@ -33,11 +33,8 @@ public class BossStats : MonoBehaviour, IEntityStats
     }
     public void die()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject enemy in enemies)
-        {
-            enemy.GetComponent<IEntityStats>().die();
-        }
+        GameObject exit = GameObject.Find("Exit");
+        exit.GetComponent<exitManager>().openExit();
         Destroy(gameObject);
     }
 
