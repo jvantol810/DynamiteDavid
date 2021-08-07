@@ -16,7 +16,7 @@ public class BossStats : MonoBehaviour, IEntityStats
     private float currentThreshold;
     private float nextThreshold;
     private BaseBossBehavior behavior;
-    
+    private bool damagingPlayer;
     public float health { get { return _health; } set { _health = health; } }
     public float maxHealth { get { return _maxHealth; } set { _maxHealth = maxHealth; } }
     public Sprite hurtSprite;
@@ -33,6 +33,11 @@ public class BossStats : MonoBehaviour, IEntityStats
     }
     public void die()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemies)
+        {
+            enemy.GetComponent<IEntityStats>().die();
+        }
         Destroy(gameObject);
     }
 
@@ -134,6 +139,27 @@ public class BossStats : MonoBehaviour, IEntityStats
                 hurt = false;
             }
         }
-       
     }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (!damagingPlayer)
+            {
+                StartCoroutine(dealContactDamage(collision.gameObject));
+            }
+            
+        }
+    }
+
+    public IEnumerator dealContactDamage(GameObject player)
+    {
+        damagingPlayer = true;
+        player.GetComponent<PlayerStats>().takeDamage(10f);
+        yield return new WaitForSeconds(0.5f);
+        damagingPlayer = false;
+    }
+
+
 }

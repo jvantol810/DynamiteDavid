@@ -112,7 +112,7 @@ public class BaseBossBehavior : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(actionDelay);
-                if(GetComponent<BossStats>().health <= 22)
+                if(GetComponent<BossStats>()._health <= 22)
                 {
                     GetComponent<SpriteRenderer>().sprite = epicSprite;
                     yield return epicAction.execute();
