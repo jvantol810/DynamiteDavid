@@ -14,6 +14,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
     public Sprite hurtSprite;
     public Sprite deadSprite;
     public GameObject supernovaFlash;
+    public GameObject exitPortal;
 
     /*ENTITY STATS INTERFACE DATA MEMBERS*/
     [SerializeField]
@@ -66,6 +67,7 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
     {
         if(!dead)
         {
+            StopAllCoroutines();
             StartCoroutine(EndBoss());
             dead = true;
 
@@ -206,6 +208,10 @@ public class SupernovaBoss : MonoBehaviour, IEntityStats
         yield return new WaitForSeconds(1f);
         supernovaFlash.SetActive(true);
         bossDialogue.StartDialogue();
+        yield return new WaitForSeconds(4f);
+        exitPortal.SetActive(true);
+        supernovaFlash.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 }
