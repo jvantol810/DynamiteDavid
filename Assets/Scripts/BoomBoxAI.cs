@@ -6,7 +6,6 @@ using UnityEngine;
 public class BoomBoxAI : MonoBehaviour, IEntityStats
 {
     
-    private GameObject player;//IDK if i need this yet
     public DialogueUI bossDialogue;
     public BossHealthUI BHealthUI;
 
@@ -21,7 +20,6 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     public GameObject tape;
     public GameObject leftSpawn;
     public GameObject rightSpawn;
-    public GameObject exitSpawn;
     [Header("Bullet pools")]
     public BulletPool leftPool;
     public BulletPool rightPool;

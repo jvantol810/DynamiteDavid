@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7670100279960489225}
   - component: {fileID: 1620833818}
   - component: {fileID: 1620833817}
+  - component: {fileID: 1620833819}
   m_Layer: 0
   m_Name: BOOMBox
   m_TagString: Enemy
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,12 +145,35 @@ MonoBehaviour:
   leftSpeaker: {fileID: 1039025759802465965}
   rightSpeaker: {fileID: 1039025758354625960}
   tape: {fileID: 1039025759830444487}
+  leftSpawn: {fileID: 0}
+  rightSpawn: {fileID: 0}
   leftPool: {fileID: 1039025759802465960}
   rightPool: {fileID: 1039025758354625965}
   tapePool: {fileID: 1039025759830444482}
   speed: 2
-  _health: 750
-  _maxHealth: 750
+  _health: 1
+  _maxHealth: 1
+--- !u!50 &1620833819
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685527527221548908}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1001 &6693127305625554140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,6 +189,10 @@ PrefabInstance:
       propertyPath: poolSize
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 5536831454148611795, guid: 33bd04f67b275cf4e84d23cdb13d7bd9, type: 3}
     - target: {fileID: 5947460424389761394, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -305,8 +333,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: poolSize
-      value: 2000
+      value: 700
       objectReference: {fileID: 0}
+    - target: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 5536831454148611795, guid: 33bd04f67b275cf4e84d23cdb13d7bd9, type: 3}
     - target: {fileID: 5947460424389761394, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -449,6 +481,10 @@ PrefabInstance:
       propertyPath: poolSize
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 5947460424389761393, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 5536831454148611795, guid: 33bd04f67b275cf4e84d23cdb13d7bd9, type: 3}
     - target: {fileID: 5947460424389761394, guid: 1d07ad88557d6da498a5a8e4e1793c51, type: 3}
       propertyPath: m_RootOrder
       value: 0
