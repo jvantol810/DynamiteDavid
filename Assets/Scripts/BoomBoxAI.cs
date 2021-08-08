@@ -224,7 +224,8 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
         if (dead) return;
         StopAllCoroutines();
         sp.sprite = deathSprite;
-        exitSpawn.GetComponent<SpawnPrefab>().Spawn();
+        GameObject exit = GameObject.Find("Exit");
+        exit.GetComponent<exitManager>().openExit();
         this.enabled = false;
         dead = true;
     }
