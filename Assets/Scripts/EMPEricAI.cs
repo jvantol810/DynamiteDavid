@@ -7,8 +7,13 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
 {
 
     public BossHealthUI bossHealthUI;
+    public GameObject player;
+    public CirclePattern circlePattern;
 
-    [Header("IEntityStats")]
+    [Header("Stats")]
+    public float speed;
+    public int stageDuration;
+    public int lightsOutDuration;
     [SerializeField]
     public float _health;
     [SerializeField]
@@ -24,37 +29,113 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
 
     [Header("Lights")]
     public Light2D[] stageLights;
+    public Light2D mainLight;
 
     private bool midAction = false;
+    private bool pulseOnCooldown = false;
+    private int nextMove = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         bossHealthUI.SetMaxHealth(health);
         bossHealthUI.SetCurrentHealth(health);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        spriteRenderer.sprite = spStage1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!midAction) {
+            controlAI();
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+    }
+
+    public void controlAI() 
+    {
+        StartCoroutine(pulseWave());
+
         
+    }
+
+    public IEnumerator pulseWave() {
+        midAction = true;
+
+        StopCoroutine(fireBullets());
+
+        spriteRenderer.sprite = spStage2;
+        foreach(Light2D light in stageLights) {
+            light.color = Color.yellow;
+        }
+        yield return new WaitForSeconds(stageDuration);
+
+        spriteRenderer.sprite = spStage3;
+        foreach(Light2D light in stageLights) {
+            light.color = Color.green;
+        }
+        yield return new WaitForSeconds(stageDuration);
+
+        StartCoroutine(lightsOut());
+
+        //bullet burst in all directions
+        circlePattern.FireFromObject();
+
+        spriteRenderer.sprite = spStage1;
+        foreach(Light2D light in stageLights) {
+            light.color = Color.red;
+        }
+
+        pulseOnCooldown = true;
+        midAction = false;
+        StartCoroutine(fireBullets());
+    }
+
+    public IEnumerator lightsOut() {
+        mainLight.enabled = false;
+        yield return new WaitForSeconds(lightsOutDuration);
+        pulseOnCooldown = false;
+        mainLight.enabled = true;
+        yield return null;
+    }
+
+    public IEnumerator fireBullets() {
+        yield return null;
     }
 
     public void takeDamage(float amt) 
     {
-        if (health - amt <= 0) {
+        if (_health - amt <= 0) {
             die();
         }
-        health -= amt;
+        _health -= amt;
+        bossHealthUI.SetCurrentHealth(health);
     }
 
     public void heal(float amt) 
     {
-
+        if(_health + amt > _maxHealth)
+            {
+                _health = _maxHealth;
+            }
+            else
+            {
+                _health += amt;
+            }
     }
 
     public void die() 
     {
+        StopAllCoroutines();
 
+        //open exit
+        GameObject exit = GameObject.Find("Exit");
+        exit.GetComponent<exitManager>().openExit();
+
+        Destroy(gameObject);
     }
 }

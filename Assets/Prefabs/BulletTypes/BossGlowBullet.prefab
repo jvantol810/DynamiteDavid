@@ -105,7 +105,7 @@ MonoBehaviour:
   directionArrow: {fileID: 6140893711990064345}
   spriteObject: {fileID: 5857300501216416488}
   damage: 5
-  _speed: 0
+  _speed: 2
   _duration: 1
   _angle: 180
   _direction: 0

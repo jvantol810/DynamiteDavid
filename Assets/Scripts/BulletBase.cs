@@ -222,6 +222,9 @@ public class BulletBase : MonoBehaviour, IBullet
         {
             boomBox.takeDamage(damagedealt);
         }
+        else if(collidedObject.TryGetComponent(out EMPEricAI empEric)) {
+            empEric.takeDamage(damagedealt);
+        }
         
 
         //Repeat this for any unique stat script that you need!
