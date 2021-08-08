@@ -9,6 +9,7 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
     public BossHealthUI bossHealthUI;
     public GameObject player;
     public CirclePattern circlePattern;
+    public CirclePattern circlePattern2;
 
     [Header("Stats")]
     public float speed;
@@ -44,55 +45,53 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
         player = GameObject.FindGameObjectWithTag("Player");
 
         spriteRenderer.sprite = spStage1;
+        StartCoroutine(pulseWave());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!midAction) {
-            controlAI();
-        }
-
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if(!midAction) transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
-    public void controlAI() 
-    {
-        StartCoroutine(pulseWave());
-
-        
-    }
+    // public void controlAI() 
+    // {
+    //     StartCoroutine(pulseWave());
+    //     transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+    // }
 
     public IEnumerator pulseWave() {
-        midAction = true;
+        while (true) {
+            midAction = true;
 
-        StopCoroutine(fireBullets());
+            StopCoroutine(fireBullets());
 
-        spriteRenderer.sprite = spStage2;
-        foreach(Light2D light in stageLights) {
-            light.color = Color.yellow;
+            spriteRenderer.sprite = spStage2;
+            foreach(Light2D light in stageLights) {
+                light.color = Color.yellow;
+            }
+            yield return new WaitForSeconds(stageDuration);
+
+            spriteRenderer.sprite = spStage3;
+            foreach(Light2D light in stageLights) {
+                light.color = Color.green;
+            }
+            yield return new WaitForSeconds(stageDuration);
+
+            StartCoroutine(lightsOut());
+
+            //bullet burst in all directions
+            circlePattern.FireFromObject();
+
+            spriteRenderer.sprite = spStage1;
+            foreach(Light2D light in stageLights) {
+                light.color = Color.red;
+            }
+
+            midAction = false;
+            StartCoroutine(fireBullets());
+            yield return new WaitForSeconds(lightsOutDuration);
         }
-        yield return new WaitForSeconds(stageDuration);
-
-        spriteRenderer.sprite = spStage3;
-        foreach(Light2D light in stageLights) {
-            light.color = Color.green;
-        }
-        yield return new WaitForSeconds(stageDuration);
-
-        StartCoroutine(lightsOut());
-
-        //bullet burst in all directions
-        circlePattern.FireFromObject();
-
-        spriteRenderer.sprite = spStage1;
-        foreach(Light2D light in stageLights) {
-            light.color = Color.red;
-        }
-
-        pulseOnCooldown = true;
-        midAction = false;
-        StartCoroutine(fireBullets());
     }
 
     public IEnumerator lightsOut() {
@@ -104,7 +103,10 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
     }
 
     public IEnumerator fireBullets() {
-        yield return null;
+        while (true) {
+            circlePattern2.FireFromObject();
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void takeDamage(float amt) 
