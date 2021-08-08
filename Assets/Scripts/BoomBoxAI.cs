@@ -32,7 +32,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     public float _maxHealth;
     
     private int num;
-    public bool inSequence;
+    private bool inSequence;
     private bool angryState = false;
     private bool spoken = false;
     private bool dead = false;
@@ -224,7 +224,8 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
         if (dead) return;
         StopAllCoroutines();
         sp.sprite = deathSprite;
-        exitSpawn.GetComponent<SpawnPrefab>().Spawn();
+        GameObject exit = GameObject.Find("Exit");
+        exit.GetComponent<exitManager>().openExit();
         this.enabled = false;
         dead = true;
     }
