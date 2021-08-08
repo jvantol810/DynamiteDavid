@@ -138,6 +138,8 @@ public class EMPEricAI : MonoBehaviour, IEntityStats
         GameObject exit = GameObject.Find("Exit");
         exit.GetComponent<exitManager>().openExit();
 
+        mainLight.enabled = true;
+
         Destroy(gameObject);
     }
 }
