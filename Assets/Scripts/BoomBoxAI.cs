@@ -32,7 +32,7 @@ public class BoomBoxAI : MonoBehaviour, IEntityStats
     public float _maxHealth;
     
     private int num;
-    public bool inSequence;
+    private bool inSequence;
     private bool angryState = false;
     private bool spoken = false;
     private bool dead = false;
